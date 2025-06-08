@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home</title>
+  <title>About & Contact</title>
   <style>
     body {
       background-color: #ffd1dc;
@@ -22,18 +22,27 @@
       color: black;
       font-weight: bold;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 2em 0;
-    }
-    th, td {
-      border: 1px solid #aaa;
-      padding: 0.5em;
-      text-align: left;
-    }
     .container {
       padding: 0 2em;
+    }
+    form {
+      margin-top: 2em;
+    }
+    label {
+      display: block;
+      margin-top: 1em;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.5em;
+      margin-top: 0.2em;
+      font-size: 12px;
+      font-family: sans-serif;
+    }
+    button {
+      margin-top: 1em;
+      padding: 0.5em 1em;
+      font-size: 12px;
     }
   </style>
 </head>
@@ -43,22 +52,58 @@
     <a href="about.html">about & contact</a>
   </nav>
   <div class="container">
-    <table>
-      <thead>
-        <tr>
-          <th>Institution</th>
-          <th>Exhibition Format</th>
-          <th>Year</th>
-          <th>Month</th>
-          <th>Artist Fee</th>
-          <th>Production Fee</th>
-          <th>Vederglag</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Add table rows here as needed -->
-      </tbody>
-    </table>
+    <form action="mailto:studio@carlosacorreia.com" method="post" enctype="text/plain">
+      <label for="institution">Institution</label>
+      <input type="text" id="institution" name="Institution" required>
+
+      <label for="format">Exhibition Format</label>
+      <select id="format" name="Exhibition Format" required>
+        <option value="individual">Individual</option>
+        <option value="group">Group Exhibition</option>
+        <option value="duo-show">Duo-show</option>
+      </select>
+
+      <label for="year">Year</label>
+      <select id="year" name="Year">
+        <!-- Generate years from 2015 to current -->
+        <script>
+          const yearSelect = document.currentScript.parentElement.querySelector('#year');
+          for (let y = 2015; y <= new Date().getFullYear(); y++) {
+            const opt = document.createElement('option');
+            opt.value = y;
+            opt.textContent = y;
+            yearSelect.appendChild(opt);
+          }
+        </script>
+      </select>
+
+      <label for="month">Month</label>
+      <select id="month" name="Month">
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+      </select>
+
+      <label for="artist_fee">Artist Fee</label>
+      <input type="text" id="artist_fee" name="Artist Fee">
+
+      <label for="production_fee">Production Fee</label>
+      <input type="text" id="production_fee" name="Production Fee">
+
+      <label for="vederglag">Vederglag</label>
+      <input type="text" id="vederglag" name="Vederglag">
+
+      <button type="submit">Send</button>
+    </form>
   </div>
 </body>
 </html>
