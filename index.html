@@ -11,13 +11,14 @@
       font-family: "PT Serif", serif;
       font-size: 17px;
       margin: 0;
-      padding: 0 2em 2em;
+      padding: 0;
       color: #34080B;
     }
 
     .container {
       max-width: 1500px;
       margin: 0 auto;
+      padding: 0 2em 2em;
     }
 
     header {
@@ -37,6 +38,8 @@
     nav {
       display: flex;
       gap: 2em;
+      margin: 0;
+      padding: 0;
     }
 
     nav a {
@@ -44,9 +47,10 @@
       color: #34080B;
       font-weight: 700;
       font-size: 17px;
+      margin: 0;
+      padding: 0;
     }
 
-    /* Filters container */
     .filters {
       display: flex;
       gap: 1em;
@@ -62,7 +66,6 @@
       white-space: nowrap;
     }
 
-    /* Matching about.html form inputs/select style */
     .filters select,
     .filters input[type="text"] {
       width: 150px;
@@ -78,22 +81,10 @@
       cursor: pointer;
     }
 
-    /* Custom arrow for select */
-    .filters select {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334080B'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0.6em center;
-      background-size: 0.8em;
-    }
-
-    .filters select::-ms-expand {
-      display: none;
-    }
-
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1em;
+      margin-top: 1.5em;
     }
 
     th, td {
@@ -106,6 +97,7 @@
     th {
       background-color: transparent;
       cursor: pointer;
+      font-weight: 700;
     }
 
     tbody tr:nth-child(even) {
@@ -115,7 +107,6 @@
     thead th {
       position: sticky;
       top: 0;
-      background-color: #ffffe6;
       z-index: 1;
     }
   </style>
@@ -132,25 +123,27 @@
     </header>
 
     <div class="filters">
-      <label for="filterFormat">Exhibition format:</label>
-      <select id="filterFormat">
+      <label for="formatFilter">Exhibition format</label>
+      <select id="formatFilter">
         <option value="">All</option>
         <option value="Individual">Individual</option>
         <option value="Group Exhibition">Group Exhibition</option>
         <option value="Duo-show">Duo-show</option>
       </select>
 
-      <label for="filterYear">Year:</label>
-      <select id="filterYear">
+      <label for="yearFilter">Year</label>
+      <select id="yearFilter">
         <option value="">All</option>
-        <option value="2025">2025</option>
-        <option value="2024">2024</option>
-        <option value="2023">2023</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
         <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
       </select>
 
-      <label for="filterInstitution">Search:</label>
-      <input type="text" id="filterInstitution" placeholder="Search" />
+      <label for="institutionSearch">Search</label>
+      <input type="text" id="institutionSearch" placeholder="Search" />
     </div>
 
     <table id="feeTable">
@@ -172,78 +165,76 @@
           <td>N/A</td>
         </tr>
         <tr>
-          <td>Individual</td>
-          <td>2024</td>
-          <td>Kunsthall Oslo</td>
-          <td>7000 NOK</td>
-          <td>1000 NOK</td>
-        </tr>
-        <tr>
-          <td>Group Exhibition</td>
-          <td>2023</td>
-          <td>Galleri F15</td>
-          <td>6000 NOK</td>
-          <td>500 NOK</td>
+          <td>Duo-show</td>
+          <td>2025</td>
+          <td>BABEL visningsrom</td>
+          <td>5000 NOK</td>
+          <td>N/A</td>
         </tr>
         <tr>
           <td>Duo-show</td>
-          <td>2022</td>
-          <td>Kunstnernes Hus</td>
-          <td>5500 NOK</td>
-          <td>700 NOK</td>
+          <td>2025</td>
+          <td>BABEL visningsrom</td>
+          <td>5000 NOK</td>
+          <td>N/A</td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <script>
-    let sortDirection = {};
-    function sortTable(colIndex) {
+    // Sort function
+    function sortTable(columnIndex) {
       const table = document.getElementById("feeTable");
       const tbody = table.tBodies[0];
       const rows = Array.from(tbody.querySelectorAll("tr"));
-
-      const dir = sortDirection[colIndex] === "asc" ? "desc" : "asc";
-      sortDirection[colIndex] = dir;
+      const isNumeric = columnIndex === 1; // Year column is numeric
 
       rows.sort((a, b) => {
-        const cellA = a.children[colIndex].textContent.trim().toLowerCase();
-        const cellB = b.children[colIndex].textContent.trim().toLowerCase();
+        const cellA = a.children[columnIndex].textContent.trim().toLowerCase();
+        const cellB = b.children[columnIndex].textContent.trim().toLowerCase();
 
-        if (!isNaN(cellA) && !isNaN(cellB)) {
-          return dir === "asc" ? cellA - cellB : cellB - cellA;
+        if (isNumeric) {
+          return parseInt(cellA) - parseInt(cellB);
         }
-        return dir === "asc" ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+        return cellA.localeCompare(cellB);
       });
 
       tbody.innerHTML = "";
       rows.forEach(row => tbody.appendChild(row));
     }
 
+    // Filter function
+    const formatFilter = document.getElementById("formatFilter");
+    const yearFilter = document.getElementById("yearFilter");
+    const institutionSearch = document.getElementById("institutionSearch");
+    const tableBody = document.querySelector("#feeTable tbody");
+
     function filterTable() {
-      const formatFilter = document.getElementById("filterFormat").value.toLowerCase();
-      const yearFilter = document.getElementById("filterYear").value.toLowerCase();
-      const institutionFilter = document.getElementById("filterInstitution").value.toLowerCase();
+      const formatValue = formatFilter.value.toLowerCase();
+      const yearValue = yearFilter.value;
+      const searchValue = institutionSearch.value.toLowerCase();
 
-      const table = document.getElementById("feeTable");
-      const rows = table.tBodies[0].rows;
+      for (const row of tableBody.rows) {
+        const formatText = row.cells[0].textContent.toLowerCase();
+        const yearText = row.cells[1].textContent;
+        const institutionText = row.cells[2].textContent.toLowerCase();
 
-      for (let row of rows) {
-        const format = row.cells[0].textContent.toLowerCase();
-        const year = row.cells[1].textContent.toLowerCase();
-        const institution = row.cells[2].textContent.toLowerCase();
+        const matchesFormat = !formatValue || formatText === formatValue;
+        const matchesYear = !yearValue || yearText === yearValue;
+        const matchesSearch = institutionText.includes(searchValue);
 
-        const matchFormat = !formatFilter || format.includes(formatFilter);
-        const matchYear = !yearFilter || year.includes(yearFilter);
-        const matchInstitution = !institutionFilter || institution.includes(institutionFilter);
-
-        row.style.display = matchFormat && matchYear && matchInstitution ? "" : "none";
+        if (matchesFormat && matchesYear && matchesSearch) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
       }
     }
 
-    document.getElementById("filterFormat").addEventListener("change", filterTable);
-    document.getElementById("filterYear").addEventListener("change", filterTable);
-    document.getElementById("filterInstitution").addEventListener("input", filterTable);
+    formatFilter.addEventListener("change", filterTable);
+    yearFilter.addEventListener("change", filterTable);
+    institutionSearch.addEventListener("input", filterTable);
   </script>
 
 </body>
