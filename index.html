@@ -9,16 +9,17 @@
     body {
       background-color: #ffffe6;
       font-family: "PT Serif", serif;
-      font-size: 17px;
+      font-size: 24px;       /* same as about.html */
+      line-height: 1.4;      /* consistent line height */
       margin: 0;
-      padding: 0;
+      padding: 0 2em 2em;    /* moved padding to body for consistency */
       color: #34080B;
     }
 
     .container {
       max-width: 1500px;
       margin: 0 auto;
-      padding: 0 2em 2em;
+      /* removed padding from container to avoid double padding */
     }
 
     header {
@@ -45,7 +46,7 @@
       text-decoration: underline;
       color: #34080B;
       font-weight: 700;
-      font-size: 17px;
+      font-size: 17px; /* smaller font for nav as in about.html */
     }
 
     main {
@@ -55,7 +56,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1em;
+      /* removed margin-top to avoid extra space */
     }
 
     th, td {
@@ -64,6 +65,7 @@
       text-align: left;
       background-color: transparent;
       color: #34080B;
+      font-size: 17px; /* smaller font for table content */
     }
 
     thead th {
