@@ -85,6 +85,16 @@
     form button:hover {
       background-color: #c9506d;
     }
+
+    footer {
+      margin-top: 4em;
+      font-size: 0.8em;
+    }
+
+    footer a {
+      color: black;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -102,18 +112,11 @@
       <p>
         This website is a tool for artists in Norway to gain a better overview of the fee practices across various institutions nationwide. Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with different institutions. Although all entries are anonymous, each contribution is highly valuable. Suggestions for improving the site are warmly welcomed.
       </p>
-      <p>
-        Related organizations: <br>
-        <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank">NBK</a><br>
-        <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank">NK</a>
-      </p>
     </div>
 
     <div class="contact-form">
       <form action="https://formsubmit.co/9670ffa316e509cc8f9a647b882641f2" method="POST">
         <input type="hidden" name="_captcha" value="false">
-
-        <input type="text" name="institution" placeholder="Institution" required>
 
         <select name="exhibition_format" required>
           <option value="">Exhibition Format</option>
@@ -126,31 +129,18 @@
           <option value="">Year</option>
         </select>
 
-        <select name="month" required>
-          <option value="">Month</option>
-          <option value="N/A">N/A</option>
-          <option value="January">January</option>
-          <option value="February">February</option>
-          <option value="March">March</option>
-          <option value="April">April</option>
-          <option value="May">May</option>
-          <option value="June">June</option>
-          <option value="July">July</option>
-          <option value="August">August</option>
-          <option value="September">September</option>
-          <option value="October">October</option>
-          <option value="November">November</option>
-          <option value="December">December</option>
-        </select>
-
+        <input type="text" name="institution" placeholder="Institution" required>
         <input type="text" name="artist_fee" placeholder="Artist Fee" required>
         <input type="text" name="production_fee" placeholder="Production Fee" required>
-        <input type="text" name="vederglag" placeholder="Vederglag" required>
 
         <button type="submit">Send</button>
       </form>
     </div>
   </div>
+
+  <footer>
+    <p><a href="https://www.smorpress.com" target="_blank">website by SMØR</a></p>
+  </footer>
 
   <script>
     const yearSelect = document.querySelector('select[name="year"]');
