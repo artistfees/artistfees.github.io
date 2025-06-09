@@ -27,6 +27,7 @@
       font-weight: 700;
       font-size: 24px;
       margin: 0;
+      color: #34080B;
     }
 
     nav {
@@ -45,9 +46,9 @@
     main {
       margin-top: 2em;
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 4em;
-      align-items: flex-start;
+      align-items: flex-start; /* align columns at top */
     }
 
     .info-text, .contact-form {
@@ -57,19 +58,16 @@
       max-width: 600px;
     }
 
-    .info-text a {
-      color: #34080B;
-      text-decoration: underline;
-    }
-
     form {
       display: flex;
       flex-direction: column;
+      width: 100%;
     }
 
     form input,
     form select {
       width: 100%;
+      max-width: none;
       margin: 0 0 1em 0;
       padding: 0.5em;
       padding-right: 2em;
@@ -96,20 +94,26 @@
     }
 
     form button {
-      width: 100%;
-      padding: 0.5em;
-      font-size: 17px;
       background-color: #34080B;
       color: white;
       border: none;
-      cursor: pointer;
+      padding: 0.5em;
+      font-size: 17px;
       font-weight: 700;
       font-family: "PT Serif", serif;
+      cursor: pointer;
+      width: 100%;
+      max-width: none;
       text-align: left;
     }
 
     form button:hover {
-      opacity: 0.9;
+      background-color: #2a0608;
+    }
+
+    a {
+      color: #34080B;
+      text-decoration: underline;
     }
 
     @media (min-width: 768px) {
@@ -124,6 +128,22 @@
 
       .contact-form {
         flex: 3;
+        max-width: none;
+      }
+
+      form select {
+        width: 33%;
+        max-width: none;
+        margin-bottom: 1em;
+      }
+
+      form input {
+        width: 100%;
+        max-width: none;
+      }
+
+      form button {
+        width: 100%;
         max-width: none;
       }
     }
@@ -144,8 +164,8 @@
         <p>This website is a tool for artists to gain a better overview of the fee practices across various institutions in Norway.</p>
         <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with different institutions.</p>
         <p>These are two links regarding guidance rates from 
-          <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank">Norskebilledkunstnere</a> and 
-          <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank">Norskekunsthandverkere</a>.
+          <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank" rel="noopener noreferrer">Norskebilledkunstnere</a> and 
+          <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank" rel="noopener noreferrer">Norskekunsthandverkere</a>.
         </p>
       </section>
 
@@ -154,12 +174,14 @@
           <input type="hidden" name="_captcha" value="false">
 
           <select name="exhibition_format" required>
+            <option value="" disabled selected>Exhibition Format</option>
             <option value="Individual">Individual</option>
             <option value="Group Exhibition">Group Exhibition</option>
             <option value="Duo Show">Duo Show</option>
           </select>
 
           <select name="year" required>
+            <option value="" disabled selected>Year</option>
           </select>
 
           <input type="text" name="institution" placeholder="Institution" required>
