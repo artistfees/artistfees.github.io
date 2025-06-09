@@ -100,3 +100,21 @@
 
       <label for="vederglag">Vederglag</label>
       <input type="text" id="vederglag" name="Vederglag">
+
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    // Populate year dropdown from 2015 to current year
+    const yearSelect = document.getElementById("year");
+    const currentYear = new Date().getFullYear();
+    for (let y = 2015; y <= currentYear; y++) {
+      const option = document.createElement("option");
+      option.value = y;
+      option.textContent = y;
+      yearSelect.appendChild(option);
+    }
+  </script>
+</body>
+</html>
