@@ -15,25 +15,18 @@
       color: #34080B;
     }
 
-    .container {
-      max-width: 1500px;
-      margin: 0 auto;
-      /* No extra padding here, as body already has padding */
-    }
-
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5em 0 0.5em;
       flex-wrap: wrap;
+      padding: 1.5em 0 0.5em;
     }
 
     .site-title {
       font-weight: 700;
       font-size: 24px;
       margin: 0;
-      color: #34080B;
     }
 
     nav {
@@ -49,69 +42,48 @@
       font-size: 17px;
     }
 
-    /* Filters container - match about.html style for selects */
-    .filters {
-      margin-top: 2em;
+    .filter-container {
       display: flex;
-      gap: 1em;
       flex-wrap: wrap;
-      align-items: center;
+      gap: 1em;
+      margin: 2em 0 1em;
     }
 
-    .filters select,
-    .filters input[type="text"] {
-      font-family: "PT Serif", serif;
-      font-size: 17px;
+    .filter-container select,
+    .filter-container input {
+      border: 2px solid #34080B;
       padding: 0.5em;
-      padding-right: 2em;
-      border: 1px solid #34080B;
-      border-radius: 0;
+      font-size: 17px;
+      font-family: "PT Serif", serif;
       background-color: transparent;
       color: #34080B;
-      box-sizing: border-box;
+      border-radius: 0;
       appearance: none;
-      max-width: 200px; /* roughly 1/3 of max container */
-      cursor: pointer;
-    }
-
-    .filters select {
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334080B'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 0.6em center;
       background-size: 0.8em;
     }
 
-    .filters select::-ms-expand {
-      display: none;
-    }
-
-    .filters input[type="text"] {
-      max-width: 250px;
-    }
-
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1.5em;
-      border: 2px solid #34080B; /* thicker border matching text */
+      margin-top: 1em;
     }
 
     th, td {
-      border: 2px solid #34080B; /* thick border */
-      padding: 0.5em 0.75em;
+      border: 2px solid #34080B;
+      padding: 0.6em;
       text-align: left;
-      font-size: 17px;
-      color: #34080B;
     }
 
     th {
       background-color: transparent;
       cursor: pointer;
-      font-weight: 700;
     }
 
     tbody tr:nth-child(even) {
-      background-color: transparent; /* no background */
+      background-color: #fff6f8;
     }
 
     thead th {
@@ -122,6 +94,7 @@
   </style>
 </head>
 <body>
+
   <div class="container">
     <header>
       <nav>
@@ -131,33 +104,26 @@
       <h1 class="site-title">Artist Fee Archive Norway</h1>
     </header>
 
-    <div class="filters">
-      <select id="filterFormat" aria-label="Exhibition Format">
-        <option value="">Exhibition format</option>
+    <div class="filter-container">
+      <select id="formatFilter">
+        <option value="">Exhibition Format</option>
         <option value="Individual">Individual</option>
         <option value="Group Exhibition">Group Exhibition</option>
         <option value="Duo Show">Duo Show</option>
       </select>
-
-      <select id="filterYear" aria-label="Year">
+      <select id="yearFilter">
         <option value="">Year</option>
-        <option>2020</option>
-        <option>2021</option>
-        <option>2022</option>
-        <option>2023</option>
-        <option>2024</option>
-        <option>2025</option>
-        <option>2026</option>
-        <option>2027</option>
-        <option>2028</option>
-        <option>2029</option>
-        <option>2030</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
       </select>
-
-      <input type="text" id="searchInstitution" placeholder="Search" aria-label="Search" />
+      <input type="text" id="searchInput" placeholder="Search">
     </div>
 
-    <table id="feeTable" aria-label="Artist Fee Archive table">
+    <table id="feeTable">
       <thead>
         <tr>
           <th onclick="sortTable(0)">Exhibition Format</th>
@@ -177,78 +143,65 @@
         </tr>
         <tr>
           <td>Group Exhibition</td>
-          <td>2024</td>
-          <td>Kunstnernes Hus</td>
-          <td>8000 NOK</td>
-          <td>2000 NOK</td>
+          <td>2023</td>
+          <td>Trondheim Kunsthall</td>
+          <td>10000 NOK</td>
+          <td>5000 NOK</td>
         </tr>
         <tr>
           <td>Individual</td>
-          <td>2023</td>
-          <td>Galleri XYZ</td>
-          <td>4500 NOK</td>
-          <td>1500 NOK</td>
+          <td>2024</td>
+          <td>Galleri Riis</td>
+          <td>15000 NOK</td>
+          <td>12000 NOK</td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <script>
-    // Filter and Search functionality
-    const filterFormat = document.getElementById('filterFormat');
-    const filterYear = document.getElementById('filterYear');
-    const searchInstitution = document.getElementById('searchInstitution');
+    const formatFilter = document.getElementById('formatFilter');
+    const yearFilter = document.getElementById('yearFilter');
+    const searchInput = document.getElementById('searchInput');
     const table = document.getElementById('feeTable');
-    const tbody = table.tBodies[0];
+    const rows = Array.from(table.getElementsByTagName('tbody')[0].rows);
 
     function filterTable() {
-      const formatValue = filterFormat.value.toLowerCase();
-      const yearValue = filterYear.value.toLowerCase();
-      const searchValue = searchInstitution.value.toLowerCase();
+      const format = formatFilter.value.toLowerCase();
+      const year = yearFilter.value.toLowerCase();
+      const search = searchInput.value.toLowerCase();
 
-      Array.from(tbody.rows).forEach(row => {
-        const format = row.cells[0].textContent.toLowerCase();
-        const year = row.cells[1].textContent.toLowerCase();
-        const institution = row.cells[2].textContent.toLowerCase();
+      rows.forEach(row => {
+        const cells = row.getElementsByTagName('td');
+        const formatText = cells[0].textContent.toLowerCase();
+        const yearText = cells[1].textContent.toLowerCase();
+        const institutionText = cells[2].textContent.toLowerCase();
 
-        const matchesFormat = formatValue === '' || format === formatValue;
-        const matchesYear = yearValue === '' || year === yearValue;
-        const matchesSearch = institution.includes(searchValue);
+        const matchesFormat = !format || formatText.includes(format);
+        const matchesYear = !year || yearText.includes(year);
+        const matchesSearch = !search || institutionText.includes(search);
 
-        if (matchesFormat && matchesYear && matchesSearch) {
-          row.style.display = '';
-        } else {
-          row.style.display = 'none';
-        }
+        row.style.display = (matchesFormat && matchesYear && matchesSearch) ? '' : 'none';
       });
     }
 
-    filterFormat.addEventListener('change', filterTable);
-    filterYear.addEventListener('change', filterTable);
-    searchInstitution.addEventListener('input', filterTable);
+    formatFilter.addEventListener('change', filterTable);
+    yearFilter.addEventListener('change', filterTable);
+    searchInput.addEventListener('keyup', filterTable);
 
-    // Sorting function
-    function sortTable(colIndex) {
-      const rowsArray = Array.from(tbody.rows);
-      const isNumeric = colIndex === 1 || colIndex === 3 || colIndex === 4;
-      const asc = tbody.getAttribute('data-sort-dir') !== 'asc';
-
-      rowsArray.sort((a, b) => {
-        let valA = a.cells[colIndex].textContent.trim();
-        let valB = b.cells[colIndex].textContent.trim();
-
-        if (isNumeric) {
-          valA = parseFloat(valA) || 0;
-          valB = parseFloat(valB) || 0;
-        }
-
-        if (valA < valB) return asc ? -1 : 1;
-        if (valA > valB) return asc ? 1 : -1;
-        return 0;
+    function sortTable(columnIndex) {
+      const tbody = table.tBodies[0];
+      const sortedRows = [...tbody.rows].sort((a, b) => {
+        const textA = a.cells[columnIndex].textContent.trim().toLowerCase();
+        const textB = b.cells[columnIndex].textContent.trim().toLowerCase();
+        return textA.localeCompare(textB);
       });
 
-      rowsArray.forEach(row => tbody.appendChild(row));
-      tbody.setAttribute('data-sort-dir', asc ? 'asc' : 'desc');
+      while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+      }
+
+      sortedRows.forEach(row => tbody.appendChild(row));
     }
   </script>
 </body>
