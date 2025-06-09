@@ -49,11 +49,10 @@
     }
 
     .info-text, .contact-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 600px;
-
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 600px; /* mobile max width */
     }
 
     form {
@@ -64,7 +63,6 @@
     form input,
     form select {
       width: 100%;
-      max-width: 900px;
       margin: 0 0 1em 0;
       padding: 0.5em;
       padding-right: 2em;
@@ -91,7 +89,6 @@
 
     form button {
       width: 100%;
-      max-width: 900px;
       padding: 0.5em;
       font-size: 17px;
       background-color: #fff9c4;
@@ -107,15 +104,22 @@
     }
 
     @media (min-width: 768px) {
-      .info-text, .contact-form {
+      .info-text {
         flex: 1;
-        max-width: 50%;
+        max-width: 200px;
       }
 
+      .contact-form {
+        flex: 3;
+        max-width: 600px;
+      }
+
+      /* Make inputs and button full width inside contact form */
       form input,
       form select,
       form button {
-        width: 150px;
+        width: 100%;
+        max-width: none; /* remove max-width limit */
       }
     }
   </style>
