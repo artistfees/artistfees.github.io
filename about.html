@@ -12,19 +12,18 @@
       font-size: 24px;
       margin: 0;
       padding: 0 2em 2em;
-      display: flex;
-      justify-content: center;
     }
 
     .container {
       max-width: 1500px;
-      width: 100%;
+      margin: 0 auto;
     }
 
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
       padding: 1.5em 0 0.5em;
     }
 
@@ -37,6 +36,7 @@
     nav {
       display: flex;
       gap: 2em;
+      flex-wrap: wrap;
     }
 
     nav a {
@@ -50,22 +50,26 @@
       display: flex;
       gap: 4em;
       margin-top: 2em;
+      flex-wrap: wrap;
     }
 
-    .info-text {
-      flex: 1;
-      max-width: 50%;
+    .info-text, .contact-form {
+      flex: 1 1 100%;
+      max-width: 100%;
     }
 
-    .contact-form {
-      flex: 1;
-      max-width: 50%;
+    form {
+      display: flex;
+      flex-direction: column;
     }
 
-    form input {
-      width: 150px;
+    form input,
+    form select {
+      width: 100%;
+      max-width: 300px;
       margin: 0 0 1em 0;
       padding: 0.5em;
+      padding-right: 2em;
       font-size: 17px;
       border: 1px solid #ccc;
       border-radius: 0;
@@ -76,21 +80,6 @@
     }
 
     form select {
-      width: 150px;
-      margin: 0 0 1em 0;
-      padding: 0.5em;
-      padding-right: 2em;
-      font-size: 17px;
-      border: 1px solid #ccc;
-      border-radius: 0;
-      background-color: transparent;
-      font-family: "PT Serif", serif;
-      box-sizing: border-box;
-
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='black'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 0.6em center;
@@ -103,10 +92,11 @@
     }
 
     form button {
-      width: 150px;
+      width: 100%;
+      max-width: 300px;
       padding: 0.5em;
       font-size: 17px;
-      background-color: #fff9c4; /* pastel yellow */
+      background-color: #fff9c4;
       color: black;
       border: none;
       cursor: pointer;
@@ -114,7 +104,20 @@
     }
 
     form button:hover {
-      background-color: #fff59d; /* slightly darker pastel yellow */
+      background-color: #fff59d;
+    }
+
+    @media (min-width: 768px) {
+      .info-text, .contact-form {
+        flex: 1;
+        max-width: 50%;
+      }
+
+      form input,
+      form select,
+      form button {
+        width: 150px;
+      }
     }
   </style>
 </head>
