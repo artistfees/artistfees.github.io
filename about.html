@@ -16,6 +16,9 @@
 
     header {
       padding: 1.5em 0 0.5em;
+      display: flex;
+      justify-content: flex-end; /* move title to right */
+      align-items: center;
     }
 
     .site-title {
@@ -25,16 +28,7 @@
     }
 
     nav {
-      display: flex;
-      gap: 2em;
-      margin-top: 0.5em;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: black;
-      font-weight: 700;
-      font-size: 17px;
+      display: none; /* hide nav */
     }
 
     .content {
@@ -99,20 +93,19 @@
 
   <header>
     <h1 class="site-title">Artist Fee Archive Norway</h1>
-    <nav>
-      <a href="index.html">home</a>
-      <a href="about.html">about & contact</a>
-    </nav>
   </header>
 
   <div class="content">
     <div class="info-text">
       <p>
-        This website is a tool for artists in Norway to gain a better overview of the fee practices across various institutions nationwide. Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with different institutions.
+        This website is a tool for artists in Norway to gain a better overview of the fee practices across various institutions nationwide.
+      </p> 
+      <p>
+        Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with different institutions.
       </p>
       <p>
-        <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank">NBK</a>
-        <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank">NK</a>
+        <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank">norskebilledkunstnere</a>
+        <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank">norskekunsthandverkere</a>
       </p>
     </div>
 
