@@ -12,6 +12,13 @@
       font-size: 24px;
       margin: 0;
       padding: 0 2em 2em;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 1500px;
+      width: 100%;
     }
 
     header {
@@ -39,21 +46,27 @@
       font-size: 17px;
     }
 
-    .info-text {
+    main {
+      display: flex;
+      gap: 4em;
       margin-top: 2em;
-      max-width: 600px;
+    }
+
+    .info-text {
+      flex: 1;
+      max-width: 50%;
     }
 
     .contact-form {
-      max-width: 400px;
-      margin-top: 2em;
+      flex: 1;
+      max-width: 50%;
     }
 
     form input,
     form select,
     form button {
       display: block;
-      width: 100%;
+      width: 150px;
       margin: 0 0 1em 0;
       padding: 0.5em;
       font-size: 17px;
@@ -91,45 +104,51 @@
   </style>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <nav>
+        <a href="index.html">entries</a>
+        <a href="about.html">submit</a>
+      </nav>
+      <h1 class="site-title">Artist Fee Archive Norway</h1>
+    </header>
 
-  <header>
-    <nav>
-      <a href="index.html">home</a>
-      <a href="about.html">about & contact</a>
-    </nav>
-    <h1 class="site-title">Artist Fee Archive Norway</h1>
-  </header>
+    <main>
+      <section class="info-text">
+        <p>This website is a tool for artists in Norway to gain a better overview of the fee practices across various institutions nationwide.</p> 
+        <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with different institutions.</p>
+        <p>
+          <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank">norskebilledkunstnere</a>
+        </p>
+        <p>
+          <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank">norskekunsthandverkere</a>
+        </p>
+      </section>
 
-  <main>
-    <section class="info-text">
-      <p>This website is a tool for artists in Norway to gain a better overview of the fee practices across various institutions nationwide.</p> 
-      <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with different institutions.</p>
-      <p>Here are two links guidance rates: <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank">norskebilledkunstnere</a>, <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank">norskekunsthandverkere</a></p>
-    </section>
+      <section class="contact-form">
+        <form action="https://formsubmit.co/9670ffa316e509cc8f9a647b882641f2" method="POST">
+          <input type="hidden" name="_captcha" value="false">
 
-    <section class="contact-form">
-      <form action="https://formsubmit.co/9670ffa316e509cc8f9a647b882641f2" method="POST">
-        <input type="hidden" name="_captcha" value="false">
+          <select name="exhibition_format" required>
+            <option value="">Exhibition Format</option>
+            <option value="Individual">Individual</option>
+            <option value="Group Exhibition">Group Exhibition</option>
+            <option value="Duo Show">Duo Show</option>
+          </select>
 
-        <select name="exhibition_format" required>
-          <option value="">Exhibition Format</option>
-          <option value="Individual">Individual</option>
-          <option value="Group Exhibition">Group Exhibition</option>
-          <option value="Duo Show">Duo Show</option>
-        </select>
+          <select name="year" required>
+            <option value="">Year</option>
+          </select>
 
-        <select name="year" required>
-          <option value="">Year</option>
-        </select>
+          <input type="text" name="institution" placeholder="Institution" required>
+          <input type="text" name="artist_fee" placeholder="Artist Fee">
+          <input type="text" name="production_fee" placeholder="Production Fee">
 
-        <input type="text" name="institution" placeholder="Institution" required>
-        <input type="text" name="artist_fee" placeholder="Artist Fee">
-        <input type="text" name="production_fee" placeholder="Production Fee">
-
-        <button type="submit">Send</button>
-      </form>
-    </section>
-  </main>
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+  </div>
 
   <script>
     const yearSelect = document.querySelector('select[name="year"]');
@@ -140,6 +159,5 @@
       yearSelect.appendChild(option);
     }
   </script>
-
 </body>
 </html>
