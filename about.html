@@ -12,6 +12,7 @@
       font-size: 24px;
       margin: 0;
       padding: 0 2em 2em;
+      color: #34080B;
     }
 
     header {
@@ -20,12 +21,14 @@
       align-items: center;
       flex-wrap: wrap;
       padding: 1.5em 0 0.5em;
+      color: #34080B;
     }
 
     .site-title {
       font-weight: 700;
       font-size: 24px;
       margin: 0;
+      color: #34080B;
     }
 
     nav {
@@ -35,8 +38,8 @@
     }
 
     nav a {
-      text-decoration: none;
-      color: black;
+      text-decoration: underline;
+      color: #34080B;
       font-weight: 700;
       font-size: 17px;
     }
@@ -46,7 +49,6 @@
       display: flex;
       flex-wrap: wrap;
       gap: 4em;
-      align-items: flex-start; /* Align content at top */
     }
 
     .info-text, .contact-form {
@@ -54,10 +56,12 @@
       flex-direction: column;
       width: 100%;
       max-width: 600px;
+      color: #34080B;
     }
 
-    .info-text p {
-      margin-top: 0; /* Remove spacing that pushes column down */
+    .info-text a {
+      color: #34080B;
+      text-decoration: underline;
     }
 
     form {
@@ -68,22 +72,22 @@
     form input,
     form select {
       width: 100%;
-      max-width: 400px; /* Control dropdown/input width */
-      min-width: 200px;
+      max-width: 900px;
       margin: 0 0 1em 0;
       padding: 0.5em;
       padding-right: 2em;
       font-size: 17px;
-      border: 1px solid #ccc;
+      border: 1px solid white;
       border-radius: 0;
       background-color: transparent;
       font-family: "PT Serif", serif;
       box-sizing: border-box;
       appearance: none;
+      color: #34080B;
     }
 
     form select {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='black'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334080B'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 0.6em center;
       background-size: 0.8em;
@@ -96,15 +100,16 @@
 
     form button {
       width: 100%;
-      max-width: 400px;
+      max-width: 900px;
       padding: 0.5em;
       font-size: 17px;
       background-color: #fff9c4;
-      color: black;
+      color: #34080B;
       border: none;
       cursor: pointer;
       font-weight: 700;
       font-family: "PT Serif", serif;
+      text-align: left;
     }
 
     form button:hover {
@@ -114,6 +119,7 @@
     @media (min-width: 768px) {
       main {
         flex-wrap: nowrap;
+        align-items: flex-start;
       }
 
       .info-text {
@@ -130,7 +136,7 @@
       form select,
       form button {
         width: 100%;
-        max-width: 400px;
+        max-width: none;
       }
     }
   </style>
@@ -160,7 +166,6 @@
           <input type="hidden" name="_captcha" value="false">
 
           <select name="exhibition_format" required>
-            <option value="">Exhibition Format</option>
             <option value="Individual">Individual</option>
             <option value="Group Exhibition">Group Exhibition</option>
             <option value="Duo Show">Duo Show</option>
