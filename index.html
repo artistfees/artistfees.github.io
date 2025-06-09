@@ -27,6 +27,7 @@
       font-weight: 700;
       font-size: 24px;
       margin: 0;
+      color: #34080B;
     }
 
     nav {
@@ -46,23 +47,29 @@
       display: flex;
       flex-wrap: wrap;
       gap: 1em;
-      margin: 2em 0 1em;
+      margin-top: 2em;
+      margin-bottom: 1em;
     }
 
     .filter-container select,
     .filter-container input {
-      border: 2px solid #34080B;
-      padding: 0.5em;
-      font-size: 17px;
       font-family: "PT Serif", serif;
-      background-color: transparent;
+      font-size: 17px;
       color: #34080B;
+      background-color: transparent;
+      padding: 0.5em;
+      border: 2px solid #34080B;
       border-radius: 0;
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334080B'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 0.6em center;
       background-size: 0.8em;
+      box-sizing: border-box;
+    }
+
+    .filter-container select::-ms-expand {
+      display: none;
     }
 
     table {
@@ -79,7 +86,6 @@
 
     th {
       background-color: transparent;
-      cursor: pointer;
     }
 
     tbody tr:nth-child(even) {
@@ -94,7 +100,6 @@
   </style>
 </head>
 <body>
-
   <div class="container">
     <header>
       <nav>
@@ -126,9 +131,9 @@
     <table id="feeTable">
       <thead>
         <tr>
-          <th onclick="sortTable(0)">Exhibition Format</th>
-          <th onclick="sortTable(1)">Year</th>
-          <th onclick="sortTable(2)">Institution</th>
+          <th>Exhibition Format</th>
+          <th>Year</th>
+          <th>Institution</th>
           <th>Exhibition Fee</th>
           <th>Production Fee</th>
         </tr>
@@ -188,21 +193,6 @@
     formatFilter.addEventListener('change', filterTable);
     yearFilter.addEventListener('change', filterTable);
     searchInput.addEventListener('keyup', filterTable);
-
-    function sortTable(columnIndex) {
-      const tbody = table.tBodies[0];
-      const sortedRows = [...tbody.rows].sort((a, b) => {
-        const textA = a.cells[columnIndex].textContent.trim().toLowerCase();
-        const textB = b.cells[columnIndex].textContent.trim().toLowerCase();
-        return textA.localeCompare(textB);
-      });
-
-      while (tbody.firstChild) {
-        tbody.removeChild(tbody.firstChild);
-      }
-
-      sortedRows.forEach(row => tbody.appendChild(row));
-    }
   </script>
 </body>
 </html>
