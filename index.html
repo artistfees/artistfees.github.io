@@ -7,26 +7,23 @@
   <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap" rel="stylesheet" />
   <style>
     body {
-      background-color: #ffffe6;
+      background-color:  #ffffe6;
       font-family: "PT Serif", serif;
-      font-size: 24px;       /* same as about.html */
-      line-height: 1.4;      /* consistent line height */
+      font-size: 17px;
       margin: 0;
-      padding: 0 2em 2em;    /* moved padding to body for consistency */
+      padding: 0 2em 2em;
       color: #34080B;
     }
 
     .container {
       max-width: 1500px;
       margin: 0 auto;
-      /* removed padding from container to avoid double padding */
     }
 
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
       padding: 1.5em 0 0.5em;
     }
 
@@ -34,44 +31,80 @@
       font-weight: 700;
       font-size: 24px;
       margin: 0;
+      color: #34080B;
     }
 
     nav {
       display: flex;
       gap: 2em;
-      flex-wrap: wrap;
     }
 
     nav a {
-      text-decoration: underline;
+      text-decoration: none;
       color: #34080B;
       font-weight: 700;
-      font-size: 17px; /* smaller font for nav as in about.html */
+      font-size: 17px;
     }
 
-    main {
-      margin-top: 2em;
+    /* Filters container */
+    .filters {
+      display: flex;
+      gap: 1em;
+      margin-top: 1.5em;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filters label {
+      font-weight: 700;
+      color: #34080B;
+      margin-right: 0.3em;
+      white-space: nowrap;
+    }
+
+    /* Matching about.html form inputs/select style */
+    .filters select,
+    .filters input[type="text"] {
+      width: 150px;
+      font-family: "PT Serif", serif;
+      font-size: 17px;
+      padding: 0.5em;
+      padding-right: 2em;
+      border: 1px solid #34080B;
+      border-radius: 0;
+      background-color: transparent;
+      color: #34080B;
+      box-sizing: border-box;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    /* Custom arrow for select */
+    .filters select {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334080B'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.6em center;
+      background-size: 0.8em;
+    }
+
+    .filters select::-ms-expand {
+      display: none;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      /* removed margin-top to avoid extra space */
+      margin-top: 1em;
     }
 
     th, td {
       border: 1px solid #34080B;
       padding: 0.6em;
       text-align: left;
-      background-color: transparent;
       color: #34080B;
-      font-size: 17px; /* smaller font for table content */
     }
 
-    thead th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
+    th {
       background-color: transparent;
       cursor: pointer;
     }
@@ -79,9 +112,17 @@
     tbody tr:nth-child(even) {
       background-color: transparent;
     }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      background-color: #ffffe6;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
+
   <div class="container">
     <header>
       <nav>
@@ -91,62 +132,120 @@
       <h1 class="site-title">Artist Fee Archive Norway</h1>
     </header>
 
-    <main>
-      <table id="feeTable">
-        <thead>
-          <tr>
-            <th onclick="sortTable(0)">Exhibition Format</th>
-            <th onclick="sortTable(1)">Year</th>
-            <th onclick="sortTable(2)">Institution</th>
-            <th>Exhibition Fee</th>
-            <th>Production Fee</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Duo-show</td>
-            <td>2025</td>
-            <td>BABEL visningsrom</td>
-            <td>5000 NOK</td>
-            <td>N/A</td>
-          </tr>
-          <tr>
-            <td>Duo-show</td>
-            <td>2025</td>
-            <td>BABEL visningsrom</td>
-            <td>5000 NOK</td>
-            <td>N/A</td>
-          </tr>
-          <tr>
-            <td>Duo-show</td>
-            <td>2025</td>
-            <td>BABEL visningsrom</td>
-            <td>5000 NOK</td>
-            <td>N/A</td>
-          </tr>
-        </tbody>
-      </table>
-    </main>
+    <div class="filters">
+      <label for="filterFormat">Format:</label>
+      <select id="filterFormat">
+        <option value="">All</option>
+        <option value="Individual">Individual</option>
+        <option value="Group Exhibition">Group Exhibition</option>
+        <option value="Duo-show">Duo-show</option>
+      </select>
+
+      <label for="filterYear">Year:</label>
+      <select id="filterYear">
+        <option value="">All</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+      </select>
+
+      <label for="filterInstitution">Institution:</label>
+      <input type="text" id="filterInstitution" placeholder="Search Institution" />
+    </div>
+
+    <table id="feeTable">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">Exhibition Format</th>
+          <th onclick="sortTable(1)">Year</th>
+          <th onclick="sortTable(2)">Institution</th>
+          <th>Exhibition Fee</th>
+          <th>Production Fee</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Duo-show</td>
+          <td>2025</td>
+          <td>BABEL visningsrom</td>
+          <td>5000 NOK</td>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <td>Individual</td>
+          <td>2024</td>
+          <td>Kunsthall Oslo</td>
+          <td>7000 NOK</td>
+          <td>1000 NOK</td>
+        </tr>
+        <tr>
+          <td>Group Exhibition</td>
+          <td>2023</td>
+          <td>Galleri F15</td>
+          <td>6000 NOK</td>
+          <td>500 NOK</td>
+        </tr>
+        <tr>
+          <td>Duo-show</td>
+          <td>2022</td>
+          <td>Kunstnernes Hus</td>
+          <td>5500 NOK</td>
+          <td>700 NOK</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <script>
-    function sortTable(columnIndex) {
+    let sortDirection = {};
+    function sortTable(colIndex) {
       const table = document.getElementById("feeTable");
       const tbody = table.tBodies[0];
       const rows = Array.from(tbody.querySelectorAll("tr"));
-      const isNumeric = columnIndex === 1;
 
-      const sortedRows = rows.sort((a, b) => {
-        const cellA = a.children[columnIndex].textContent.trim().toLowerCase();
-        const cellB = b.children[columnIndex].textContent.trim().toLowerCase();
-        return isNumeric
-          ? parseInt(cellA) - parseInt(cellB)
-          : cellA.localeCompare(cellB);
+      const dir = sortDirection[colIndex] === "asc" ? "desc" : "asc";
+      sortDirection[colIndex] = dir;
+
+      rows.sort((a, b) => {
+        const cellA = a.children[colIndex].textContent.trim().toLowerCase();
+        const cellB = b.children[colIndex].textContent.trim().toLowerCase();
+
+        if (!isNaN(cellA) && !isNaN(cellB)) {
+          return dir === "asc" ? cellA - cellB : cellB - cellA;
+        }
+        return dir === "asc" ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
       });
 
       tbody.innerHTML = "";
-      sortedRows.forEach(row => tbody.appendChild(row));
+      rows.forEach(row => tbody.appendChild(row));
     }
+
+    function filterTable() {
+      const formatFilter = document.getElementById("filterFormat").value.toLowerCase();
+      const yearFilter = document.getElementById("filterYear").value.toLowerCase();
+      const institutionFilter = document.getElementById("filterInstitution").value.toLowerCase();
+
+      const table = document.getElementById("feeTable");
+      const rows = table.tBodies[0].rows;
+
+      for (let row of rows) {
+        const format = row.cells[0].textContent.toLowerCase();
+        const year = row.cells[1].textContent.toLowerCase();
+        const institution = row.cells[2].textContent.toLowerCase();
+
+        const matchFormat = !formatFilter || format.includes(formatFilter);
+        const matchYear = !yearFilter || year.includes(yearFilter);
+        const matchInstitution = !institutionFilter || institution.includes(institutionFilter);
+
+        row.style.display = matchFormat && matchYear && matchInstitution ? "" : "none";
+      }
+    }
+
+    document.getElementById("filterFormat").addEventListener("change", filterTable);
+    document.getElementById("filterYear").addEventListener("change", filterTable);
+    document.getElementById("filterInstitution").addEventListener("input", filterTable);
   </script>
+
 </body>
 </html>
