@@ -16,7 +16,7 @@
 
     header {
       display: flex;
-      justify-content: space-between; /* menu left, title right */
+      justify-content: space-between;
       align-items: center;
       padding: 1.5em 0 0.5em;
     }
@@ -61,6 +61,22 @@
       border-radius: 0;
       background-color: transparent;
       font-family: "PT Serif", serif;
+      appearance: none; /* remove default styling */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: none; /* no dropdown arrow */
+      box-shadow: none; /* remove any shadows */
+    }
+
+    /* Special minimal style for select */
+    form select {
+      background-color: transparent;
+      cursor: pointer;
+    }
+
+    /* For some browsers, still show arrow with minimal style */
+    form select::-ms-expand {
+      display: none; /* IE */
     }
 
     form button {
@@ -72,20 +88,6 @@
 
     form button:hover {
       background-color: #c9506d;
-    }
-
-    footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      margin: 1em;
-      font-size: 24px;
-      font-family: "PT Serif", serif;
-    }
-
-    footer a {
-      color: black;
-      text-decoration: none;
     }
   </style>
 </head>
@@ -136,10 +138,6 @@
       </form>
     </section>
   </main>
-
-  <footer>
-    <p><a href="https://www.smorpress.com" target="_blank">website by SMØR</a></p>
-  </footer>
 
   <script>
     const yearSelect = document.querySelector('select[name="year"]');
