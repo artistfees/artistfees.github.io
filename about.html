@@ -15,10 +15,10 @@
     }
 
     header {
-      padding: 1.5em 0 0.5em;
       display: flex;
-      justify-content: flex-end; /* move title to right */
+      justify-content: space-between; /* menu left, title right */
       align-items: center;
+      padding: 1.5em 0 0.5em;
     }
 
     .site-title {
@@ -28,25 +28,25 @@
     }
 
     nav {
-      display: none; /* hide nav */
+      display: flex;
+      gap: 2em;
     }
 
-    .content {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2em;
-      margin-top: 2em;
+    nav a {
+      text-decoration: none;
+      color: black;
+      font-weight: 700;
+      font-size: 17px;
     }
 
     .info-text {
-      flex: 1;
-      min-width: 250px;
+      margin-top: 2em;
+      max-width: 600px;
     }
 
     .contact-form {
-      flex: 1;
-      min-width: 300px;
       max-width: 400px;
+      margin-top: 2em;
     }
 
     form input,
@@ -58,7 +58,7 @@
       padding: 0.5em;
       font-size: 17px;
       border: 1px solid #ccc;
-      border-radius: 0px;
+      border-radius: 0;
       background-color: transparent;
       font-family: "PT Serif", serif;
     }
@@ -92,11 +92,15 @@
 <body>
 
   <header>
+    <nav>
+      <a href="index.html">home</a>
+      <a href="about.html">about & contact</a>
+    </nav>
     <h1 class="site-title">Artist Fee Archive Norway</h1>
   </header>
 
-  <div class="content">
-    <div class="info-text">
+  <main>
+    <section class="info-text">
       <p>
         This website is a tool for artists in Norway to gain a better overview of the fee practices across various institutions nationwide.
       </p> 
@@ -107,9 +111,9 @@
         <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank">norskebilledkunstnere</a>
         <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank">norskekunsthandverkere</a>
       </p>
-    </div>
+    </section>
 
-    <div class="contact-form">
+    <section class="contact-form">
       <form action="https://formsubmit.co/9670ffa316e509cc8f9a647b882641f2" method="POST">
         <input type="hidden" name="_captcha" value="false">
 
@@ -130,8 +134,8 @@
 
         <button type="submit">Send</button>
       </form>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <footer>
     <p><a href="https://www.smorpress.com" target="_blank">website by SMØR</a></p>
