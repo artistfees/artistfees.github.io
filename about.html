@@ -49,8 +49,12 @@
     }
 
     .info-text, .contact-form {
-      flex: 1 1 100%;
-      max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+}
+
     }
 
     form {
@@ -88,7 +92,7 @@
 
     form button {
       width: 100%;
-      max-width: 300px;
+      max-width: 900px;
       padding: 0.5em;
       font-size: 17px;
       background-color: #fff9c4;
