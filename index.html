@@ -15,11 +15,6 @@
       color: #34080B;
     }
 
-    a {
-      color: #34080B;
-      text-decoration: underline;
-    }
-
     .container {
       max-width: 1500px;
       margin: 0 auto;
@@ -30,7 +25,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
       padding: 1.5em 0 0.5em;
     }
 
@@ -38,32 +32,45 @@
       font-weight: 700;
       font-size: 24px;
       margin: 0;
-      color: #34080B;
     }
 
     nav {
       display: flex;
       gap: 2em;
-      flex-wrap: wrap;
     }
 
     nav a {
+      text-decoration: none;
+      color: #34080B;
       font-weight: 700;
       font-size: 17px;
-      text-decoration: underline;
+    }
+
+    .filters {
+      display: flex;
+      gap: 1em;
+      margin: 2em 0;
+      flex-wrap: wrap;
+    }
+
+    .filters select,
+    .filters input {
+      font-size: 17px;
+      padding: 0.5em;
+      font-family: "PT Serif", serif;
+      border: 1px solid #34080B;
+      background-color: transparent;
       color: #34080B;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 2em;
-      background-color: transparent;
-      color: #34080B;
+      margin-top: 1em;
     }
 
     th, td {
-      border: 1px solid #34080B;
+      border: 1px solid #ccc;
       padding: 0.6em;
       text-align: left;
     }
@@ -71,7 +78,6 @@
     th {
       background-color: #ffe4eb;
       cursor: pointer;
-      font-weight: bold;
     }
 
     tbody tr:nth-child(even) {
@@ -83,22 +89,9 @@
       top: 0;
       z-index: 1;
     }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1em;
-      }
-
-      nav {
-        gap: 1em;
-      }
-    }
   </style>
 </head>
 <body>
-
   <div class="container">
     <header>
       <nav>
@@ -108,12 +101,30 @@
       <h1 class="site-title">Artist Fee Archive Norway</h1>
     </header>
 
+    <div class="filters">
+      <select id="formatFilter">
+        <option value="">All Formats</option>
+        <option value="Individual">Individual</option>
+        <option value="Group Exhibition">Group Exhibition</option>
+        <option value="Duo-show">Duo-show</option>
+      </select>
+
+      <select id="yearFilter">
+        <option value="">All Years</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+      </select>
+
+      <input type="text" id="searchInput" placeholder="Search institution..." />
+    </div>
+
     <table id="feeTable">
       <thead>
         <tr>
-          <th onclick="sortTable(1)">Exhibition Format</th>
-          <th onclick="sortTable(2)">Year</th>
-          <th onclick="sortTable(0)">Institution</th>
+          <th>Exhibition Format</th>
+          <th>Year</th>
+          <th>Institution</th>
           <th>Exhibition Fee</th>
           <th>Production Fee</th>
         </tr>
@@ -127,17 +138,17 @@
           <td>N/A</td>
         </tr>
         <tr>
-          <td>Duo-show</td>
-          <td>2025</td>
-          <td>BABEL visningsrom</td>
-          <td>5000 NOK</td>
-          <td>N/A</td>
+          <td>Individual</td>
+          <td>2024</td>
+          <td>Fotogalleriet</td>
+          <td>7000 NOK</td>
+          <td>2000 NOK</td>
         </tr>
         <tr>
-          <td>Duo-show</td>
-          <td>2025</td>
-          <td>BABEL visningsrom</td>
-          <td>5000 NOK</td>
+          <td>Group Exhibition</td>
+          <td>2023</td>
+          <td>Kunstnernes Hus</td>
+          <td>3000 NOK</td>
           <td>N/A</td>
         </tr>
       </tbody>
@@ -145,21 +156,30 @@
   </div>
 
   <script>
-    function sortTable(columnIndex) {
-      const table = document.getElementById("feeTable");
-      const tbody = table.tBodies[0];
-      const rows = Array.from(tbody.querySelectorAll("tr"));
+    const searchInput = document.getElementById("searchInput");
+    const formatFilter = document.getElementById("formatFilter");
+    const yearFilter = document.getElementById("yearFilter");
+    const table = document.getElementById("feeTable");
+    const rows = table.querySelectorAll("tbody tr");
 
-      const sortedRows = rows.sort((a, b) => {
-        const cellA = a.children[columnIndex].textContent.trim().toLowerCase();
-        const cellB = b.children[columnIndex].textContent.trim().toLowerCase();
-        return cellA.localeCompare(cellB);
+    function filterTable() {
+      const searchValue = searchInput.value.toLowerCase();
+      const formatValue = formatFilter.value.toLowerCase();
+      const yearValue = yearFilter.value;
+
+      rows.forEach(row => {
+        const [format, year, institution] = Array.from(row.children).map(td => td.textContent.toLowerCase());
+        const matchesSearch = institution.includes(searchValue);
+        const matchesFormat = !formatValue || format === formatValue;
+        const matchesYear = !yearValue || year === yearValue;
+
+        row.style.display = matchesSearch && matchesFormat && matchesYear ? "" : "none";
       });
-
-      tbody.innerHTML = "";
-      sortedRows.forEach(row => tbody.appendChild(row));
     }
-  </script>
 
+    searchInput.addEventListener("input", filterTable);
+    formatFilter.addEventListener("change", filterTable);
+    yearFilter.addEventListener("change", filterTable);
+  </script>
 </body>
 </html>
