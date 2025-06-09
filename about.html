@@ -22,14 +22,27 @@
       font-weight: bold;
     }
     .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2em;
       padding: 0 2em 2em 2em;
     }
-    p.intro-text {
-      margin-top: 1em;
+    .left, .right {
+      flex: 1 1 300px; /* flexible but minimum 300px */
+      box-sizing: border-box;
+    }
+    .left {
+      display: flex;
+      align-items: flex-start;
+    }
+    .intro-text {
       line-height: 1.4;
     }
     form {
-      margin-top: 2em;
+      background: #fff0f4;
+      padding: 1em;
+      border-radius: 6px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
     }
     label {
       display: block;
@@ -41,11 +54,34 @@
       margin-top: 0.2em;
       font-size: 12px;
       font-family: sans-serif;
+      border: 1px solid #ccc;
+      border-radius: 3px;
     }
     button {
       margin-top: 1em;
       padding: 0.5em 1em;
       font-size: 12px;
+      cursor: pointer;
+      border: none;
+      background-color: #d66a86;
+      color: white;
+      border-radius: 3px;
+    }
+    @media (max-width: 700px) {
+      .container {
+        flex-direction: column;
+      }
+      .left, .right {
+        flex: 1 1 100%;
+      }
+      form {
+        box-shadow: none;
+        padding: 0;
+        background: transparent;
+      }
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -56,60 +92,61 @@
   </nav>
 
   <div class="container">
-    <p class="intro-text">
-      This website is a tool for artists in Norway to gain a better overview of the fee practices across various institutions nationwide. Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with different institutions. Although all entries are anonymous, each contribution is highly valuable. Suggestions for improving the site are warmly welcomed.
-    </p>
+    <div class="left">
+      <p class="intro-text">
+        This website is a tool for artists in Norway to gain a better overview of the fee practices across various institutions nationwide. Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with different institutions. Although all entries are anonymous, each contribution is highly valuable. Suggestions for improving the site are warmly welcomed.
+      </p>
+    </div>
 
-    <form action="mailto:studio@carlosacorreia.com" method="post" enctype="text/plain">
-      <label for="institution">Institution</label>
-      <input type="text" id="institution" name="Institution" required>
+    <div class="right">
+      <form action="mailto:studio@carlosacorreia.com" method="post" enctype="text/plain">
+        <label for="institution">Institution</label>
+        <input type="text" id="institution" name="Institution" required>
 
-      <label for="format">Exhibition Format</label>
-      <select id="format" name="Exhibition Format" required>
-        <option value="individual">Individual</option>
-        <option value="group">Group Exhibition</option>
-        <option value="duo-show">Duo-show</option>
-      </select>
+        <label for="format">Exhibition Format</label>
+        <select id="format" name="Exhibition Format" required>
+          <option value="individual">Individual</option>
+          <option value="group">Group Exhibition</option>
+          <option value="duo-show">Duo-show</option>
+        </select>
 
-      <label for="year">Year</label>
-      <select id="year" name="Year">
-        <!-- Year options added by script -->
-      </select>
+        <label for="year">Year</label>
+        <select id="year" name="Year"></select>
 
-      <label for="month">Month</label>
-      <select id="month" name="Month">
-        <option>January</option>
-        <option>February</option>
-        <option>March</option>
-        <option>April</option>
-        <option>May</option>
-        <option>June</option>
-        <option>July</option>
-        <option>August</option>
-        <option>September</option>
-        <option>October</option>
-        <option>November</option>
-        <option>December</option>
-      </select>
+        <label for="month">Month</label>
+        <select id="month" name="Month">
+          <option>January</option>
+          <option>February</option>
+          <option>March</option>
+          <option>April</option>
+          <option>May</option>
+          <option>June</option>
+          <option>July</option>
+          <option>August</option>
+          <option>September</option>
+          <option>October</option>
+          <option>November</option>
+          <option>December</option>
+        </select>
 
-      <label for="artist_fee">Artist Fee</label>
-      <input type="text" id="artist_fee" name="Artist Fee">
+        <label for="artist_fee">Artist Fee</label>
+        <input type="text" id="artist_fee" name="Artist Fee">
 
-      <label for="production_fee">Production Fee</label>
-      <input type="text" id="production_fee" name="Production Fee">
+        <label for="production_fee">Production Fee</label>
+        <input type="text" id="production_fee" name="Production Fee">
 
-      <label for="vederglag">Vederglag</label>
-      <input type="text" id="vederglag" name="Vederglag">
+        <label for="vederglag">Vederglag</label>
+        <input type="text" id="vederglag" name="Vederglag">
 
-      <button type="submit">Send</button>
-    </form>
+        <button type="submit">Send</button>
+      </form>
+    </div>
   </div>
 
   <script>
-    // Populate year dropdown from 2015 to current year
+    // Populate year dropdown from 2015 to 2040
     const yearSelect = document.getElementById("year");
-    const currentYear = new Date().getFullYear();
-    for (let y = 2015; y <= currentYear; y++) {
+    for (let y = 2015; y <= 2040; y++) {
       const option = document.createElement("option");
       option.value = y;
       option.textContent = y;
