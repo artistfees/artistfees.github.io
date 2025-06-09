@@ -68,9 +68,8 @@
       width: 150px;
       font-family: "PT Serif", serif;
       font-size: 17px;
-      padding: 0.5em;
-      padding-right: 2em;
-      border: 1px solid #34080B;
+      padding: 0.5em 0.5em;
+      border: 2px solid #34080B;
       border-radius: 0;
       background-color: transparent;
       color: #34080B;
@@ -98,7 +97,7 @@
     }
 
     th, td {
-      border: 1px solid #34080B;
+      border: 2px solid #34080B;
       padding: 0.6em;
       text-align: left;
       color: #34080B;
@@ -133,7 +132,7 @@
     </header>
 
     <div class="filters">
-      <label for="filterFormat">Format:</label>
+      <label for="filterFormat">Exhibition format:</label>
       <select id="filterFormat">
         <option value="">All</option>
         <option value="Individual">Individual</option>
@@ -150,8 +149,8 @@
         <option value="2022">2022</option>
       </select>
 
-      <label for="filterInstitution">Institution:</label>
-      <input type="text" id="filterInstitution" placeholder="Search Institution" />
+      <label for="filterInstitution">Search:</label>
+      <input type="text" id="filterInstitution" placeholder="Search" />
     </div>
 
     <table id="feeTable">
