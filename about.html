@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Artist Fee Archive Norway</title>
-  <!-- Fonts -->
+  <title>About & Contact - Artist Fee Archive Norway</title>
   <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -40,32 +39,46 @@
       font-size: 17px;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2em;
       margin-top: 2em;
     }
 
-    th, td {
-      border: 1px solid #ccc;
-      padding: 0.6em;
-      text-align: left;
+    .info-text {
+      flex: 1;
+      min-width: 250px;
     }
 
-    th {
-      background-color: #ffe4eb;
+    .contact-form {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    form input,
+    form select,
+    form textarea,
+    form button {
+      display: block;
+      width: 100%;
+      margin-bottom: 1em;
+      padding: 0.6em;
+      font-size: 17px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: white;
+    }
+
+    form button {
+      background-color: #e05d79;
+      color: white;
+      border: none;
       cursor: pointer;
     }
 
-    tbody tr:nth-child(even) {
-      background-color: #ffeef3;
-    }
-
-    /* Sticky header (optional) */
-    thead th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
+    form button:hover {
+      background-color: #c9506d;
     }
   </style>
 </head>
@@ -79,61 +92,64 @@
     </nav>
   </header>
 
-  <table id="feeTable">
-    <thead>
-      <tr>
-        <th onclick="sortTable(0)">Institution</th>
-        <th onclick="sortTable(1)">Exhibition Format</th>
-        <th onclick="sortTable(2)">Year</th>
-        <th>Month</th>
-        <th>Artist Fee</th>
-        <th>Production Fee</th>
-        <th>Vederglag</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>National Gallery</td>
-        <td>Individual</td>
-        <td>2024</td>
-        <td>May</td>
-        <td>5000 NOK</td>
-        <td>2000 NOK</td>
-        <td>Paid</td>
-      </tr>
-      <tr>
-        <td>City Art Museum</td>
-        <td>Group Exhibition</td>
-        <td>2023</td>
-        <td>September</td>
-        <td>3000 NOK</td>
-        <td>1000 NOK</td>
-        <td>Pending</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="content">
+    <div class="info-text">
+      <p>
+        This website is a tool for artists in Norway to gain a better overview of the fee practices across various institutions nationwide. Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with different institutions. Although all entries are anonymous, each contribution is highly valuable. Suggestions for improving the site are warmly welcomed.
+      </p>
+    </div>
+
+    <div class="contact-form">
+      <form action="mailto:studio@carlosacorreia.com" method="POST" enctype="text/plain">
+        <input type="text" name="institution" placeholder="Institution" required>
+
+        <select name="exhibition_format" required>
+          <option value="">Exhibition Format</option>
+          <option value="Individual">Individual</option>
+          <option value="Group Exhibition">Group Exhibition</option>
+          <option value="Duo Show">Duo Show</option>
+        </select>
+
+        <select name="year" required>
+          <option value="">Year</option>
+          <!-- Years from 2015 to 2040 -->
+          <!-- Auto-generated via script below -->
+        </select>
+
+        <select name="month" required>
+          <option value="">Month</option>
+          <option value="N/A">N/A</option>
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
+        </select>
+
+        <input type="text" name="artist_fee" placeholder="Artist Fee" required>
+        <input type="text" name="production_fee" placeholder="Production Fee" required>
+        <input type="text" name="vederglag" placeholder="Vederglag" required>
+
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
 
   <script>
-    function sortTable(columnIndex) {
-      const table = document.getElementById("feeTable");
-      const tbody = table.tBodies[0];
-      const rows = Array.from(tbody.querySelectorAll("tr"));
-      const isNumeric = columnIndex === 2; // Year column
-
-      const sortedRows = rows.sort((a, b) => {
-        const cellA = a.children[columnIndex].textContent.trim().toLowerCase();
-        const cellB = b.children[columnIndex].textContent.trim().toLowerCase();
-
-        if (isNumeric) {
-          return parseInt(cellA) - parseInt(cellB);
-        } else {
-          return cellA.localeCompare(cellB);
-        }
-      });
-
-      // Re-insert sorted rows
-      tbody.innerHTML = "";
-      sortedRows.forEach(row => tbody.appendChild(row));
+    // Populate year dropdown from 2015 to 2040
+    const yearSelect = document.querySelector('select[name="year"]');
+    for (let y = 2015; y <= 2040; y++) {
+      const option = document.createElement('option');
+      option.value = y;
+      option.textContent = y;
+      yearSelect.appendChild(option);
     }
   </script>
 
