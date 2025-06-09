@@ -3,22 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Home</title>
-  <!-- Import PT Serif font -->
+  <title>Artist Fee Archive Norway</title>
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap" rel="stylesheet" />
   <style>
     body {
-      background-color: #ffd1dc; /* pastel pink */
+      background-color: #ffd1dc;
       font-family: sans-serif;
-      font-size: 16px;
+      font-size: 17px;
       margin: 0;
-      padding: 0 2em 2em 2em;
+      padding: 0 2em 2em;
     }
+
+    header {
+      padding: 1.5em 0 0.5em;
+    }
+
+    .site-title {
+      font-family: "PT Serif", serif;
+      font-weight: 700;
+      font-size: 24px;
+      margin: 0;
+    }
+
     nav {
       display: flex;
-      justify-content: space-between;
-      padding: 1em 0;
+      gap: 2em;
+      margin-top: 0.5em;
     }
+
     nav a {
       text-decoration: none;
       color: black;
@@ -26,33 +39,52 @@
       font-weight: 700;
       font-size: 17px;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1em;
+      margin-top: 2em;
     }
+
     th, td {
-      border: 1px solid black;
-      padding: 0.5em;
+      border: 1px solid #ccc;
+      padding: 0.6em;
       text-align: left;
     }
+
     th {
       background-color: #ffe4eb;
+      cursor: pointer;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #ffeef3;
+    }
+
+    /* Sticky header (optional) */
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">home</a>
-    <a href="about.html">about & contact</a>
-  </nav>
 
-  <table>
+  <header>
+    <h1 class="site-title">Artist Fee Archive Norway</h1>
+    <nav>
+      <a href="index.html">home</a>
+      <a href="about.html">about & contact</a>
+    </nav>
+  </header>
+
+  <table id="feeTable">
     <thead>
       <tr>
-        <th>Institution</th>
-        <th>Exhibition Format</th>
-        <th>Year</th>
+        <th onclick="sortTable(0)">Institution</th>
+        <th onclick="sortTable(1)">Exhibition Format</th>
+        <th onclick="sortTable(2)">Year</th>
         <th>Month</th>
         <th>Artist Fee</th>
         <th>Production Fee</th>
@@ -60,15 +92,50 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Data rows to be added later -->
- <tr>
-      <td>BABEL visningsrom</td>
-      <td>Duo-show</td>
-      <td>2025</td>
-      <td>May</td>
-      <td>5000 NOK</td>
-    </tr>
+      <tr>
+        <td>National Gallery</td>
+        <td>Individual</td>
+        <td>2024</td>
+        <td>May</td>
+        <td>5000 NOK</td>
+        <td>2000 NOK</td>
+        <td>Paid</td>
+      </tr>
+      <tr>
+        <td>City Art Museum</td>
+        <td>Group Exhibition</td>
+        <td>2023</td>
+        <td>September</td>
+        <td>3000 NOK</td>
+        <td>1000 NOK</td>
+        <td>Pending</td>
+      </tr>
     </tbody>
   </table>
+
+  <script>
+    function sortTable(columnIndex) {
+      const table = document.getElementById("feeTable");
+      const tbody = table.tBodies[0];
+      const rows = Array.from(tbody.querySelectorAll("tr"));
+      const isNumeric = columnIndex === 2; // Year column
+
+      const sortedRows = rows.sort((a, b) => {
+        const cellA = a.children[columnIndex].textContent.trim().toLowerCase();
+        const cellB = b.children[columnIndex].textContent.trim().toLowerCase();
+
+        if (isNumeric) {
+          return parseInt(cellA) - parseInt(cellB);
+        } else {
+          return cellA.localeCompare(cellB);
+        }
+      });
+
+      // Re-insert sorted rows
+      tbody.innerHTML = "";
+      sortedRows.forEach(row => tbody.appendChild(row));
+    }
+  </script>
+
 </body>
 </html>
