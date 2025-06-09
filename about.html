@@ -123,45 +123,48 @@
       text-decoration: underline;
     }
 
-   @media (max-width: 768px) {
-  body {
-    padding: 0 1em 1em;
-  }
-
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5em;
-  }
-
-  .site-title {
-    order: 0;
-    font-size: 20px;
-    margin-bottom: 0.25em;
-  }
-
-  nav {
-    flex-direction: column;
-    gap: 0.2em;
-    order: 1;
-    width: 100%;
-  }
-
-  nav a {
-    font-size: 16px;
-  }
-
-  .filters {
-    margin-top: 1em;
-    gap: 0.1em;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .filters select,
-  .filters input[type="text"] {
-    max-width: 100%;
-  }
+    @media (max-width: 768px) {
+    body {
+      padding: 0 1em 1em;
+    }
+  
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5em;
+    }
+  
+    .site-title {
+      font-size: 20px;
+      margin-bottom: 0.25em;
+    }
+  
+    nav {
+      flex-direction: column;
+      gap: 0.2em;
+      width: 100%;
+    }
+  
+    nav a {
+      font-size: 16px;
+    }
+  
+    main {
+      flex-direction: column;
+      gap: 1em;
+    }
+  
+    .info-text,
+    .contact-form {
+      max-width: 100%;
+      width: 100%;
+    }
+  
+    form input,
+    form select,
+    form button {
+      font-size: 16px;
+      
       }
     }
   </style>
