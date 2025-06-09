@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About & Contact - Artist Fee Archive Norway</title>
   <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #ffd1dc;
-      font-family: sans-serif;
+      font-family: "Oswald", sans-serif;
       font-size: 17px;
       margin: 0;
       padding: 0 2em 2em;
@@ -68,6 +71,7 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       background-color: white;
+      font-family: "Oswald", sans-serif;
     }
 
     form button {
@@ -112,8 +116,6 @@
 
         <select name="year" required>
           <option value="">Year</option>
-          <!-- Years from 2015 to 2040 -->
-          <!-- Auto-generated via script below -->
         </select>
 
         <select name="month" required>
@@ -143,7 +145,6 @@
   </div>
 
   <script>
-    // Populate year dropdown from 2015 to 2040
     const yearSelect = document.querySelector('select[name="year"]');
     for (let y = 2015; y <= 2040; y++) {
       const option = document.createElement('option');
