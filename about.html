@@ -48,7 +48,7 @@
       display: flex;
       flex-wrap: nowrap;
       gap: 4em;
-      align-items: flex-start; /* align columns at top */
+      align-items: flex-start; /* align columns top */
     }
 
     .info-text, .contact-form {
@@ -56,6 +56,12 @@
       flex-direction: column;
       width: 100%;
       max-width: 600px;
+      align-self: flex-start; /* enforce top alignment */
+    }
+
+    /* Remove top margin on first paragraph to avoid offset */
+    .info-text p:first-child {
+      margin-top: 0;
     }
 
     form {
