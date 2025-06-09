@@ -54,40 +54,39 @@
     form button {
       display: block;
       width: 100%;
-      margin-bottom: 1em;
+      margin: 0 0 1em 0;
       padding: 0.5em;
       font-size: 17px;
       border: 1px solid #ccc;
       border-radius: 0;
       background-color: transparent;
       font-family: "PT Serif", serif;
-      appearance: none; /* remove default styling */
+      box-sizing: border-box;
+      appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
-      background-image: none; /* no dropdown arrow */
-      box-shadow: none; /* remove any shadows */
+      background-image: none;
+      box-shadow: none;
     }
 
-    /* Special minimal style for select */
     form select {
-      background-color: transparent;
       cursor: pointer;
     }
 
-    /* For some browsers, still show arrow with minimal style */
     form select::-ms-expand {
-      display: none; /* IE */
+      display: none;
     }
 
     form button {
-      background-color: #e05d79;
-      color: white;
+      background-color: #fff9c4; /* pastel yellow */
+      color: black;
       border: none;
       cursor: pointer;
+      font-weight: 700;
     }
 
     form button:hover {
-      background-color: #c9506d;
+      background-color: #fff59d; /* slightly darker pastel yellow */
     }
   </style>
 </head>
@@ -103,16 +102,9 @@
 
   <main>
     <section class="info-text">
-      <p>
-        This website is a tool for artists in Norway to gain a better overview of the fee practices across various institutions nationwide.
-      </p> 
-      <p>
-        Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with different institutions.
-      </p>
-      <p>
-        <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank">norskebilledkunstnere</a>
-        <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank">norskekunsthandverkere</a>
-      </p>
+      <p>This website is a tool for artists in Norway to gain a better overview of the fee practices across various institutions nationwide.</p> 
+      <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with different institutions.</p>
+      <p>Here are two links guidance rates: <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank">norskebilledkunstnere</a>, <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank">norskekunsthandverkere</a></p>
     </section>
 
     <section class="contact-form">
