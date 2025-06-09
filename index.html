@@ -25,6 +25,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
       padding: 1.5em 0 0.5em;
     }
 
@@ -32,12 +33,12 @@
       font-weight: 700;
       font-size: 24px;
       margin: 0;
-      color: #34080B;
     }
 
     nav {
       display: flex;
       gap: 2em;
+      flex-wrap: wrap;
     }
 
     nav a {
@@ -61,8 +62,8 @@
       border: 1px solid #34080B;
       padding: 0.6em;
       text-align: left;
-      color: #34080B;
       background-color: transparent;
+      color: #34080B;
     }
 
     thead th {
@@ -70,6 +71,7 @@
       top: 0;
       z-index: 1;
       background-color: transparent;
+      cursor: pointer;
     }
 
     tbody tr:nth-child(even) {
@@ -78,7 +80,6 @@
   </style>
 </head>
 <body>
-
   <div class="container">
     <header>
       <nav>
@@ -145,6 +146,5 @@
       sortedRows.forEach(row => tbody.appendChild(row));
     }
   </script>
-
 </body>
 </html>
