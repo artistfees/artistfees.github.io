@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About & Contact</title>
   <style>
     body {
@@ -14,7 +14,7 @@
     nav {
       display: flex;
       justify-content: space-between;
-      padding: 1em;
+      padding: 1em 2em;
     }
     nav a {
       text-decoration: none;
@@ -22,7 +22,11 @@
       font-weight: bold;
     }
     .container {
-      padding: 1em 2em;
+      padding: 0 2em 2em 2em;
+    }
+    p.intro-text {
+      margin-top: 1em;
+      line-height: 1.4;
     }
     form {
       margin-top: 2em;
@@ -52,6 +56,10 @@
   </nav>
 
   <div class="container">
+    <p class="intro-text">
+      This website is a tool for artists in Norway to gain a better overview of the fee practices across various institutions nationwide. Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with different institutions. Although all entries are anonymous, each contribution is highly valuable. Suggestions for improving the site are warmly welcomed.
+    </p>
+
     <form action="mailto:studio@carlosacorreia.com" method="post" enctype="text/plain">
       <label for="institution">Institution</label>
       <input type="text" id="institution" name="Institution" required>
@@ -65,7 +73,7 @@
 
       <label for="year">Year</label>
       <select id="year" name="Year">
-        <!-- Options will be added by script below -->
+        <!-- Year options added by script -->
       </select>
 
       <label for="month">Month</label>
@@ -92,21 +100,3 @@
 
       <label for="vederglag">Vederglag</label>
       <input type="text" id="vederglag" name="Vederglag">
-
-      <button type="submit">Send</button>
-    </form>
-  </div>
-
-  <script>
-    // Populate year dropdown from 2015 to current year
-    const yearSelect = document.getElementById("year");
-    const currentYear = new Date().getFullYear();
-    for (let y = 2015; y <= currentYear; y++) {
-      const option = document.createElement("option");
-      option.value = y;
-      option.textContent = y;
-      yearSelect.appendChild(option);
-    }
-  </script>
-</body>
-</html>
