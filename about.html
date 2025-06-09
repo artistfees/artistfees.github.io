@@ -59,12 +59,11 @@
     }
 
     form input,
-  form select {
-  display: block;
+    form select {
   width: 150px;
   margin: 0 0 1em 0;
   padding: 0.5em;
-  padding-right: 2em; /* space for the arrow */
+  padding-right: 2em; /* room for arrow */
   font-size: 17px;
   border: 1px solid #ccc;
   border-radius: 0;
@@ -82,6 +81,11 @@
   background-size: 0.8em;
   cursor: pointer;
 }
+
+form select::-ms-expand {
+  display: none;
+}
+
 
 form select::-ms-expand {
   display: none;
@@ -125,7 +129,7 @@ form select::-ms-expand {
           </select>
 
           <input type="text" name="institution" placeholder="Institution" required>
-          <input type="text" name="artist_fee" placeholder="Artist Fee">
+          <input type="text" name="artist_fee" placeholder="Exhibition Fee">
           <input type="text" name="production_fee" placeholder="Production Fee">
 
           <button type="submit">Send</button>
