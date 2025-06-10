@@ -84,12 +84,18 @@
       max-width: 250px;
     }
 
+    .table-wrapper {
+      max-height: 400px;
+      overflow-y: auto;
+      border: 2px solid #34080B;
+      margin-top: 1.5em;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1.5em;
-      border: 2px solid #34080B;
       table-layout: fixed;
+      /* Removed border here to avoid double border with wrapper */
     }
 
     th, td {
@@ -107,34 +113,22 @@
       font-weight: 700;
     }
 
-    tbody {
-      display: block;
-      max-height: 400px; /* fixed height */
-      overflow-y: auto;
-      border: none; /* remove extra border */
-    }
-
     thead {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-      border-bottom: 2px solid #34080B; /* keep header bottom border */
+      /* keep default display */
+      display: table-header-group;
+      border-bottom: 2px solid #34080B;
+      position: sticky;
+      top: 0;
+      background-color: #ffffe6;
+      z-index: 1;
     }
 
-    tbody tr {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
+    tbody {
+      /* default display */
     }
 
     tbody tr:nth-child(even) {
       background-color: transparent; 
-    }
-
-    thead th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
     }
 
     @media (max-width: 768px) {
@@ -215,40 +209,42 @@
       <input type="text" id="searchInstitution" placeholder="Search Institution" aria-label="Search Institution" />
     </div>
 
-    <table id="feeTable" aria-label="Artist Fee Archive table">
-      <thead>
-        <tr>
-          <th onclick="sortTable(0)">Exhibition Format</th>
-          <th onclick="sortTable(1)">Year</th>
-          <th onclick="sortTable(2)">Institution</th>
-          <th>Exhibition Fee</th>
-          <th>Production Fee</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Duo Show</td>
-          <td>2026</td>
-          <td>BABEL visningsrom</td>
-          <td>5000 NOK</td>
-          <td>N/A</td>
-        </tr>
-        <tr>
-          <td>Group Exhibition</td>
-          <td>2024</td>
-          <td>Kunstnernes Hus</td>
-          <td>N/A</td>
-          <td>N/A</td>
-        </tr>
-        <tr>
-          <td>Individual</td>
-          <td>2023</td>
-          <td>Galleri ASK</td>
-          <td>N/A</td>
-          <td>N/A</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table id="feeTable" aria-label="Artist Fee Archive table">
+        <thead>
+          <tr>
+            <th onclick="sortTable(0)">Exhibition Format</th>
+            <th onclick="sortTable(1)">Year</th>
+            <th onclick="sortTable(2)">Institution</th>
+            <th>Exhibition Fee</th>
+            <th>Production Fee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Duo Show</td>
+            <td>2026</td>
+            <td>BABEL visningsrom</td>
+            <td>5000 NOK</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Group Exhibition</td>
+            <td>2024</td>
+            <td>Kunstnernes Hus</td>
+            <td>N/A</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Individual</td>
+            <td>2023</td>
+            <td>Galleri ASK</td>
+            <td>N/A</td>
+            <td>N/A</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script>
@@ -296,9 +292,11 @@
         let valB = b.cells[colIndex].textContent.trim();
 
         if (isNumeric) {
-          // Extract number from fees like "5000 NOK"
-          valA = parseFloat(valA.replace(/[^\d.]/g, '')) || 0;
-          valB = parseFloat(valB.replace(/[^\d.]/g, '')) || 0;
+          valA = parseFloat(valA) || 0;
+          valB = parseFloat(valB) || 0;
+        } else {
+          valA = valA.toLowerCase();
+          valB = valB.toLowerCase();
         }
 
         if (valA < valB) return asc ? -1 : 1;
@@ -306,7 +304,14 @@
         return 0;
       });
 
+      // Remove existing rows
+      while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+      }
+
+      // Append sorted rows
       rowsArray.forEach(row => tbody.appendChild(row));
+
       tbody.setAttribute('data-sort-dir', asc ? 'asc' : 'desc');
     }
   </script>
