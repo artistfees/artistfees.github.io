@@ -84,7 +84,6 @@
     }
 
     .table-wrapper {
-      border: 2px solid #34080B;
       overflow: hidden;
       margin-top: 1.5em;
     }
@@ -92,6 +91,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
+      border: 2px solid #34080B;
       table-layout: fixed;
     }
 
@@ -104,10 +104,17 @@
       word-wrap: break-word;
     }
 
+    th {
+      background-color: transparent;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
     thead {
       display: table;
       width: 100%;
       table-layout: fixed;
+      border-bottom: 2px solid #34080B;
     }
 
     tbody {
@@ -122,13 +129,14 @@
       table-layout: fixed;
     }
 
+    tbody tr:nth-child(even) {
+      background-color: transparent;
+    }
+
     thead th {
       position: sticky;
       top: 0;
-      background-color: #ffffe6;
       z-index: 1;
-      cursor: pointer;
-      font-weight: 700;
     }
 
     @media (max-width: 768px) {
@@ -268,7 +276,7 @@
         const matchesYear = yearValue === '' || year === yearValue;
         const matchesSearch = institution.includes(searchValue);
 
-        row.style.display = (matchesFormat && matchesYear && matchesSearch) ? '' : 'none';
+        row.style.display = matchesFormat && matchesYear && matchesSearch ? '' : 'none';
       });
     }
 
