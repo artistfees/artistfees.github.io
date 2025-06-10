@@ -44,7 +44,6 @@
       font-size: 17px;
     }
 
-    /* Filters container */
     .filters {
       margin-top: 2em;
       display: flex;
@@ -84,11 +83,9 @@
       max-width: 250px;
     }
 
-    /* Scroll wrapper around table */
     .table-wrapper {
-      max-height: 400px;
-      overflow-y: auto;
       border: 2px solid #34080B;
+      overflow: hidden;
       margin-top: 1.5em;
     }
 
@@ -105,19 +102,33 @@
       font-size: 17px;
       color: #34080B;
       word-wrap: break-word;
-      background-color: #ffffe6;
     }
 
-    th {
-      font-weight: 700;
-      cursor: pointer;
+    thead {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    tbody {
+      display: block;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    tbody tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    thead th {
       position: sticky;
       top: 0;
-      z-index: 2;
-    }
-
-    tbody tr:nth-child(even) {
-      background-color: transparent;
+      background-color: #ffffe6;
+      z-index: 1;
+      cursor: pointer;
+      font-weight: 700;
     }
 
     @media (max-width: 768px) {
@@ -237,7 +248,6 @@
   </div>
 
   <script>
-    // Filter and Search functionality
     const filterFormat = document.getElementById('filterFormat');
     const filterYear = document.getElementById('filterYear');
     const searchInstitution = document.getElementById('searchInstitution');
@@ -258,11 +268,7 @@
         const matchesYear = yearValue === '' || year === yearValue;
         const matchesSearch = institution.includes(searchValue);
 
-        if (matchesFormat && matchesYear && matchesSearch) {
-          row.style.display = '';
-        } else {
-          row.style.display = 'none';
-        }
+        row.style.display = (matchesFormat && matchesYear && matchesSearch) ? '' : 'none';
       });
     }
 
@@ -270,7 +276,6 @@
     filterYear.addEventListener('change', filterTable);
     searchInstitution.addEventListener('input', filterTable);
 
-    // Sorting function
     function sortTable(colIndex) {
       const rowsArray = Array.from(tbody.rows);
       const isNumeric = colIndex === 1 || colIndex === 3 || colIndex === 4;
@@ -283,9 +288,6 @@
         if (isNumeric) {
           valA = parseFloat(valA.replace(/[^\d.]/g, '')) || 0;
           valB = parseFloat(valB.replace(/[^\d.]/g, '')) || 0;
-        } else {
-          valA = valA.toLowerCase();
-          valB = valB.toLowerCase();
         }
 
         if (valA < valB) return asc ? -1 : 1;
