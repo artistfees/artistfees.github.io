@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.counter.dev/script.js" data-id="dad985f2-4cf5-45ef-983b-e17b014b5c75" data-utcoffset="1"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Artist Fee Archive Norway</title>
@@ -43,6 +44,7 @@
       font-size: 17px;
     }
 
+    /* Filters container - match about.html style for selects */
     .filters {
       margin-top: 2em;
       display: flex;
@@ -63,7 +65,7 @@
       color: #34080B;
       box-sizing: border-box;
       appearance: none;
-      max-width: 200px;
+      max-width: 200px; /* roughly 1/3 of max container */
       cursor: pointer;
     }
 
@@ -87,6 +89,7 @@
       border-collapse: collapse;
       margin-top: 1.5em;
       border: 2px solid #34080B;
+      table-layout: fixed;
     }
 
     th, td {
@@ -95,6 +98,7 @@
       text-align: left;
       font-size: 17px;
       color: #34080B;
+      word-wrap: break-word;
     }
 
     th {
@@ -103,27 +107,34 @@
       font-weight: 700;
     }
 
+    tbody {
+      display: block;
+      max-height: 400px; /* fixed height */
+      overflow-y: auto;
+      border: none; /* remove extra border */
+    }
+
+    thead {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+      border-bottom: 2px solid #34080B; /* keep header bottom border */
+    }
+
+    tbody tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
     tbody tr:nth-child(even) {
-      background-color: transparent;
+      background-color: transparent; 
     }
 
     thead th {
       position: sticky;
       top: 0;
       z-index: 1;
-    }
-
-    tbody {
-      display: block;
-      max-height: 400px; /* adjust as needed */
-      overflow-y: auto;
-      border: none;
-    }
-    
-    thead, tbody tr {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
     }
 
     @media (max-width: 768px) {
@@ -210,45 +221,43 @@
           <th onclick="sortTable(0)">Exhibition Format</th>
           <th onclick="sortTable(1)">Year</th>
           <th onclick="sortTable(2)">Institution</th>
-          <th onclick="sortTable(3)">Exhibition Fee</th>
-          <th onclick="sortTable(4)">Production Fee</th>
+          <th>Exhibition Fee</th>
+          <th>Production Fee</th>
         </tr>
       </thead>
-      <tbody id="tableBody"></tbody>
+      <tbody>
+        <tr>
+          <td>Duo Show</td>
+          <td>2026</td>
+          <td>BABEL visningsrom</td>
+          <td>5000 NOK</td>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <td>Group Exhibition</td>
+          <td>2024</td>
+          <td>Kunstnernes Hus</td>
+          <td>N/A</td>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <td>Individual</td>
+          <td>2023</td>
+          <td>Galleri ASK</td>
+          <td>N/A</td>
+          <td>N/A</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 
   <script>
+    // Filter and Search functionality
     const filterFormat = document.getElementById('filterFormat');
     const filterYear = document.getElementById('filterYear');
     const searchInstitution = document.getElementById('searchInstitution');
-    const tbody = document.getElementById('tableBody');
-
-    let feeData = [];
-    let currentSort = { column: null, asc: true };
-
-    fetch('data.json')
-      .then(response => response.json())
-      .then(data => {
-        feeData = data;
-        renderTable(feeData);
-      });
-
-    function renderTable(data) {
-      tbody.innerHTML = '';
-      data.forEach(row => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${row.format}</td>
-          <td>${row.year}</td>
-          <td>${row.institution}</td>
-          <td>${row.exhibitionFee}</td>
-          <td>${row.productionFee}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-      filterTable();
-    }
+    const table = document.getElementById('feeTable');
+    const tbody = table.tBodies[0];
 
     function filterTable() {
       const formatValue = filterFormat.value.toLowerCase();
@@ -264,26 +273,32 @@
         const matchesYear = yearValue === '' || year === yearValue;
         const matchesSearch = institution.includes(searchValue);
 
-        row.style.display = (matchesFormat && matchesYear && matchesSearch) ? '' : 'none';
+        if (matchesFormat && matchesYear && matchesSearch) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
       });
     }
 
+    filterFormat.addEventListener('change', filterTable);
+    filterYear.addEventListener('change', filterTable);
+    searchInstitution.addEventListener('input', filterTable);
+
+    // Sorting function
     function sortTable(colIndex) {
-      const asc = (currentSort.column !== colIndex) || !currentSort.asc;
-      currentSort = { column: colIndex, asc };
+      const rowsArray = Array.from(tbody.rows);
+      const isNumeric = colIndex === 1 || colIndex === 3 || colIndex === 4;
+      const asc = tbody.getAttribute('data-sort-dir') !== 'asc';
 
-      feeData.sort((a, b) => {
-        const keys = ['format', 'year', 'institution', 'exhibitionFee', 'productionFee'];
-        let valA = a[keys[colIndex]] || '';
-        let valB = b[keys[colIndex]] || '';
+      rowsArray.sort((a, b) => {
+        let valA = a.cells[colIndex].textContent.trim();
+        let valB = b.cells[colIndex].textContent.trim();
 
-        const isNumeric = colIndex === 1 || colIndex === 3 || colIndex === 4;
         if (isNumeric) {
-          valA = parseFloat(valA) || 0;
-          valB = parseFloat(valB) || 0;
-        } else {
-          valA = valA.toLowerCase();
-          valB = valB.toLowerCase();
+          // Extract number from fees like "5000 NOK"
+          valA = parseFloat(valA.replace(/[^\d.]/g, '')) || 0;
+          valB = parseFloat(valB.replace(/[^\d.]/g, '')) || 0;
         }
 
         if (valA < valB) return asc ? -1 : 1;
@@ -291,12 +306,9 @@
         return 0;
       });
 
-      renderTable(feeData);
+      rowsArray.forEach(row => tbody.appendChild(row));
+      tbody.setAttribute('data-sort-dir', asc ? 'asc' : 'desc');
     }
-
-    filterFormat.addEventListener('change', filterTable);
-    filterYear.addEventListener('change', filterTable);
-    searchInstitution.addEventListener('input', filterTable);
   </script>
 </body>
 </html>
