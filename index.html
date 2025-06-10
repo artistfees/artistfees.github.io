@@ -14,7 +14,6 @@
       margin: 0;
       padding: 0 2em 2em;
       color: #34080B;
-
     }
 
     header {
@@ -45,7 +44,6 @@
       font-size: 17px;
     }
 
-    /* Filters container - match about.html style for selects */
     .filters {
       margin-top: 2em;
       display: flex;
@@ -66,7 +64,7 @@
       color: #34080B;
       box-sizing: border-box;
       appearance: none;
-      max-width: 200px; /* roughly 1/3 of max container */
+      max-width: 200px;
       cursor: pointer;
     }
 
@@ -84,12 +82,19 @@
     .filters input[type="text"] {
       max-width: 250px;
     }
+    
+    /* --- FIX: STYLING FOR THE CONTAINER --- */
+    .table-container {
+      min-height: 200px; /* This prevents the layout from jumping */
+      border: 2px solid #34080B;
+      border-top: none; /* The table header will provide the top border */
+    }
 
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 1.5em;
-      border: 2px solid #34080B;
+      /* border: 2px solid #34080B; */ /* <-- BORDER MOVED TO CONTAINER */
     }
 
     th, td {
@@ -105,7 +110,7 @@
       cursor: pointer;
       font-weight: 700;
     }
-
+    
     tbody tr:nth-child(even) {
       background-color: transparent; 
     }
@@ -116,47 +121,15 @@
       z-index: 1;
     }
 
-@media (max-width: 768px) {
-  body {
-    padding: 0 1em 1em;
-  }
-
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5em;
-  }
-
-  .site-title {
-    order: 0;
-    font-size: 20px;
-    margin-bottom: 0.25em;
-  }
-
-  nav {
-    flex-direction: column;
-    gap: 0.2em;
-    order: 1;
-    width: 100%;
-  }
-
-  nav a {
-    font-size: 16px;
-  }
-
-  .filters {
-    margin-top: 1em;
-    gap: 0.1em;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .filters select,
-  .filters input[type="text"] {
-    max-width: 100%;
-  }
-}
-
+    @media (max-width: 768px) {
+      body { padding: 0 1em 1em; }
+      header { flex-direction: column; align-items: flex-start; gap: 0.5em; }
+      .site-title { order: 0; font-size: 20px; margin-bottom: 0.25em; }
+      nav { flex-direction: column; gap: 0.2em; order: 1; width: 100%; }
+      nav a { font-size: 16px; }
+      .filters { margin-top: 1em; gap: 0.1em; flex-direction: column; align-items: stretch; }
+      .filters select, .filters input[type="text"] { max-width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -176,75 +149,74 @@
         <option value="Group Exhibition">Group Exhibition</option>
         <option value="Duo Show">Duo Show</option>
       </select>
-
       <select id="filterYear" aria-label="Year">
         <option value="">Year</option>
-        <option>2020</option>
-        <option>2021</option>
-        <option>2022</option>
-        <option>2023</option>
-        <option>2024</option>
-        <option>2025</option>
-        <option>2026</option>
-        <option>2027</option>
-        <option>2028</option>
-        <option>2029</option>
-        <option>2030</option>
+        <option>2020</option><option>2021</option><option>2022</option><option>2023</option><option>2024</option><option>2025</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option>
       </select>
-
       <input type="text" id="searchInstitution" placeholder="Search Institution" aria-label="Search Institution" />
     </div>
 
-    <table id="feeTable" aria-label="Artist Fee Archive table">
-      <thead>
-        <tr>
-          <th onclick="sortTable(0)">Exhibition Format</th>
-          <th onclick="sortTable(1)">Year</th>
-          <th onclick="sortTable(2)">Institution</th>
-          <th>Exhibition Fee</th>
-          <th>Production Fee</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Duo Show</td>
-          <td>2026</td>
-          <td>BABEL visningsrom</td>
-          <td>5000 NOK</td>
-          <td>N/A</td>
-        </tr>
-        <tr>
-          <td>Group Exhibition</td>
-          <td>2024</td>
-          <td>Kunstnernes Hus</td>
-          <td>N/A</td>
-          <td>N/A</td>
-        </tr>
-        <tr>
-          <td>Individual</td>
-          <td>2023</td>
-          <td>Galleri ASK</td>
-          <td>N/A</td>
-          <td>N/A</td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- FIX: ADD THE WRAPPER DIV -->
+    <div class="table-container">
+      <table id="feeTable" aria-label="Artist Fee Archive table">
+        <thead>
+          <tr>
+            <th onclick="sortTable(0)">Exhibition Format</th>
+            <th onclick="sortTable(1)">Year</th>
+            <th onclick="sortTable(2)">Institution</th>
+            <th>Exhibition Fee</th>
+            <th>Production Fee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Duo Show</td>
+            <td>2026</td>
+            <td>BABEL visningsrom</td>
+            <td>5000 NOK</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Group Exhibition</td>
+            <td>2024</td>
+            <td>Kunstnernes Hus</td>
+            <td>N/A</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Individual</td>
+            <td>2023</td>
+            <td>Galleri ASK</td>
+            <td>N/A</td>
+            <td>N/A</td>
+          </tr>
+          <!-- FIX: ADD A ROW FOR THE "NO RESULTS" MESSAGE -->
+          <tr id="no-results" style="display: none;">
+             <td colspan="5" style="text-align: center; font-style: italic;">No entries match your filter.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script>
-    // Filter and Search functionality
     const filterFormat = document.getElementById('filterFormat');
     const filterYear = document.getElementById('filterYear');
     const searchInstitution = document.getElementById('searchInstitution');
     const table = document.getElementById('feeTable');
     const tbody = table.tBodies[0];
 
+    // --- FIX: UPDATED filterTable FUNCTION ---
     function filterTable() {
       const formatValue = filterFormat.value.toLowerCase();
       const yearValue = filterYear.value.toLowerCase();
       const searchValue = searchInstitution.value.toLowerCase();
+      const noResultsRow = document.getElementById('no-results');
+      let visibleRows = 0;
 
       Array.from(tbody.rows).forEach(row => {
+        if (row.id === 'no-results') return; 
+
         const format = row.cells[0].textContent.toLowerCase();
         const year = row.cells[1].textContent.toLowerCase();
         const institution = row.cells[2].textContent.toLowerCase();
@@ -255,36 +227,40 @@
 
         if (matchesFormat && matchesYear && matchesSearch) {
           row.style.display = '';
+          visibleRows++;
         } else {
           row.style.display = 'none';
         }
       });
+      
+      if (visibleRows === 0) {
+        noResultsRow.style.display = '';
+      } else {
+        noResultsRow.style.display = 'none';
+      }
     }
 
     filterFormat.addEventListener('change', filterTable);
     filterYear.addEventListener('change', filterTable);
     searchInstitution.addEventListener('input', filterTable);
 
-    // Sorting function
+    // Sorting function (no changes needed here)
     function sortTable(colIndex) {
       const rowsArray = Array.from(tbody.rows);
       const isNumeric = colIndex === 1 || colIndex === 3 || colIndex === 4;
       const asc = tbody.getAttribute('data-sort-dir') !== 'asc';
-
       rowsArray.sort((a, b) => {
+        if(a.id === 'no-results' || b.id === 'no-results') return 0; // Don't sort the no-results row
         let valA = a.cells[colIndex].textContent.trim();
         let valB = b.cells[colIndex].textContent.trim();
-
         if (isNumeric) {
-          valA = parseFloat(valA) || 0;
-          valB = parseFloat(valB) || 0;
+          valA = parseFloat(valA.replace(' NOK', '')) || 0;
+          valB = parseFloat(valB.replace(' NOK', '')) || 0;
         }
-
         if (valA < valB) return asc ? -1 : 1;
         if (valA > valB) return asc ? 1 : -1;
         return 0;
       });
-
       rowsArray.forEach(row => tbody.appendChild(row));
       tbody.setAttribute('data-sort-dir', asc ? 'asc' : 'desc');
     }
