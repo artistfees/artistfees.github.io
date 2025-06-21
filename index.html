@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://cdn.counter.dev/script.js" data-id="dad985f2-4cf5-45ef-983b-e17b014b5c75" data-utcoffset="1"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artist Fee Archive Norway</title>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.counter.dev/script.js" data-id="dad985f2-4cf5-45ef-983b-e17b014b5c75" data-utcoffset="1"></script>
  
   <meta name="description" content="Artist Fee Archive Norway: Transparent archive of artist fees, exhibition formats, and institutions in Norway. Search and compare exhibition fees and support." />
   <meta name="keywords" content="artist fee, Norway, exhibition, archive, art institutions, exhibition fee, production fee, vederlag, travel support" />
   <meta property="og:title" content="Artist Fee Archive Norway" />
   <meta property="og:description" content="Transparent archive of artist fees and exhibition formats in Norway." />
   <meta property="og:type" content="website" />
-  
-  <title>Artist Fee Archive Norway</title>
-  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
     body {
       background-color: #ffffe6;
@@ -27,8 +27,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
       padding: 1.5em 0 0.5em;
+      flex-wrap: wrap;
     }
 
     .site-title {
@@ -39,158 +39,160 @@
     }
 
     nav {
-      background-color: #ffffe6;
       display: flex;
       gap: 2em;
       flex-wrap: wrap;
+      cursor: pointer;
     }
 
     nav a {
-      background-color: #ffffe6;
       text-decoration: none;
       color: #34080B;
       font-weight: 700;
       font-size: 17px;
       cursor: pointer;
     }
-
+    
     nav a:hover,
     nav a:focus {
       color: #34080B;
       text-decoration: underline;
+      cursor: pointer;
     }
 
     nav a:active {
       color: #34080B;
       text-decoration: underline;
     }
-
-    main {
+    
+    .filters {
       margin-top: 2em;
       display: flex;
-      flex-wrap: nowrap;
-      gap: 4em;
-      align-items: flex-start; /* align columns top */
+      gap: 1em;
+      flex-wrap: wrap;
+      align-items: center;
     }
 
-    .info-text, .contact-form {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-width: 600px;
-      align-self: flex-start; /* enforce top alignment */
-    }
-
-    /* Remove top margin on first paragraph to avoid offset */
-    .info-text p:first-child {
-      margin-top: 0;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-
-    form input,
-    form select {
-      width: 100%;
-      max-width: none;
-      margin: 0 0 1em 0;
+    .filters select,
+    .filters input[type="text"] {
+      font-family: "PT Serif", serif;
+      font-size: 17px;
       padding: 0.5em;
       padding-right: 2em;
-      font-size: 17px;
       border: 3px solid #34080B;
       border-radius: 0;
       background-color: transparent;
-      font-family: "PT Serif", serif;
+      color: #34080B;
       box-sizing: border-box;
       appearance: none;
-      color: #34080B;
+      max-width: 200px;
+      cursor: pointer;
     }
 
-    form select {
+    .filters select {
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334080B'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 0.6em center;
       background-size: 0.8em;
-      cursor: pointer;
     }
 
-    form select::-ms-expand {
+    .filters select::-ms-expand {
       display: none;
     }
 
-    form button {
-      background-color: #34080B;
-      color: white;
-      border: none;
-      padding: 0.5em;
-      font-size: 17px;
-      font-weight: 700;
-      font-family: "PT Serif", serif;
-      cursor: pointer;
+    .filters input[type="text"] {
+      max-width: 250px;
+    }
+
+    /* Table wrapper to handle scrolling */
+    .table-wrapper {
+      margin-top: 1.5em;
+      border: 0px solid #34080B; /* same border as table */
+    }
+
+    table {
       width: 100%;
-      max-width: none;
+      border-collapse: collapse;
+      table-layout: fixed;
+      border: none; /* border on wrapper instead */
+    }
+
+    th, td {
+      border: 3px solid #34080B;
+      padding: 0.5em 0.75em;
       text-align: left;
-    }
-
-    form button:hover {
-      background-color: #2a0608;
-    }
-
-    a {
+      font-size: 17px;
       color: #34080B;
-      text-decoration: underline;
+      word-wrap: break-word;
+      background-color: transparent;
+    }
+    
+      th {
+        font-weight: 700;
+        cursor: pointer;
+        position: sticky;
+        top: 0;
+        background-color: #34080B;
+        color: #ffffe6;
+        z-index: 2;
+        border: 3px solid #34080B;
+      }
+
+    tbody tr:nth-child(even) {
+      background-color: transparent;
     }
 
     @media (max-width: 768px) {
-  body {
-    padding: 0 1em 1em;
-  }
-
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5em;
-  }
-
-  .site-title {
-    order: 0; /* Ensure title comes first */
-    font-size: 20px;
-    margin-bottom: 0.25em;
-  }
-
-  nav {
-    order: 1; /* Nav comes after title */
-    flex-direction: column;
-    gap: 0.2em;
-    width: 100%;
-  }
-
-  nav a {
-    font-size: 16px;
-  }
-
-  main {
-    flex-direction: column;
-    gap: 1em;
-  }
-
-  .info-text,
-  .contact-form {
-    max-width: 100%;
-    width: 100%;
-    gap: 0.1em;
-
-  }
-
-  form input,
-  form select,
-  form button {
-    font-size: 16px;
-      
+      body {
+        padding: 0 1em 1em;
       }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5em;
+      }
+
+      .site-title {
+        order: 0;
+        font-size: 20px;
+        margin-bottom: 0.25em;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 0.2em;
+        order: 1;
+        width: 100%;
+      }
+
+      nav a {
+        font-size: 16px;
+      }
+
+      .filters {
+        margin-top: 1em;
+        gap: 0.1em;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .filters select,
+      .filters input[type="text"] {
+        max-width: 100%;
+      }
+
+      .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+      }
+    
+      table {
+        width: auto; /* Let table grow horizontally */
+        min-width: 600px; /* or whatever width triggers scroll */
+      }
+
     }
   </style>
 </head>
@@ -198,57 +200,219 @@
   <div class="container">
     <header>
       <nav>
-        <a href="about.html">submit yours anonymously</a>
+        <a href="index.html">entries</a>
+        <a href="about.html">submit</a>
       </nav>
       <h1 class="site-title">Artist Fee Archive Norway</h1>
     </header>
 
-    <main>
-      <section class="info-text">
-        <p>This website is for visual artists to gain a better overview of fees practiced by various institutions in Norway.</p>
-        <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with the different institutions.</p>
-        <p>Each anonymous submission helps keep this archive active and growing.</p>
-        <p>These are two links regarding rates in the field:
-          <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank" rel="noopener noreferrer">Norskebilledkunstnere</a><br> 
-          <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank" rel="noopener noreferrer">Norskekunsthandverkere</a>
-        </p>
-      </section>
+    <div class="filters">
+      <select id="filterFormat" aria-label="Exhibition Format">
+        <option value="">Exhibition format</option>
+        <option value="Individual">Individual</option>
+        <option value="Group Exhibition">Group Exhibition</option>
+        <option value="Duo Show">Duo Show</option>
+      </select>
 
-      <section class="contact-form">
-        <form action="https://formsubmit.co/9670ffa316e509cc8f9a647b882641f2" method="POST">
-          <input type="hidden" name="_captcha" value="false">
+      <select id="filterYear" aria-label="Year">
+        <option value="">Year</option>
+        <option>2020</option>
+        <option>2021</option>
+        <option>2022</option>
+        <option>2023</option>
+        <option>2024</option>
+        <option>2025</option>
+        <option>2026</option>
+        <option>2027</option>
+        <option>2028</option>
+        <option>2029</option>
+        <option>2030</option>
+      </select>
 
-          <select name="exhibition_format" required>
-            <option value="" disabled selected>Exhibition Format</option>
-            <option value="Individual">Individual</option>
-            <option value="Group Exhibition">Group Exhibition</option>
-            <option value="Duo Show">Duo Show</option>
-          </select>
+      <input type="text" id="searchInstitution" placeholder="Search Institution" aria-label="Search Institution" />
+    </div>
 
-          <select name="year" required>
-            <option value="" disabled selected>Year</option>
-          </select>
+    <div class="table-wrapper">
+      <table id="feeTable" aria-label="Artist Fee Archive table">
+        <thead>
+          <tr>
+            <th onclick="sortTable(0)">Exhibition Format</th>
+            <th onclick="sortTable(1)">Year</th>
+            <th onclick="sortTable(2)">Institution</th>
+            <th>Exhibition Fee p/ Artist</th>
+            <th>Production Fee p/ Artist</th>
+            <th>Vederlag p/ Artist</th>
+            <th>Travel support</th>
+            <th>Technical Support (Days)</th>
+          </tr>
+        </thead>
+         <tbody>
+          <tr>
+            <td>Individual</td>
+            <td>2026</td>
+            <td>UKS</td>
+            <td>30000 NOK</td>
+            <td>30000 NOK</td>
+            <td>Ja</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            </tr>
+          
+           <tr>
+            <td>Duo Show</td>
+            <td>2026</td>
+            <td>BABEL visningsrom</td>
+            <td>6000 NOK</td>
+            <td>No</td>
+            <td>No</td>
+            <td>N/A</td>
+            <td>N/A</td>  
+          </tr>
+           
+          <tr>
+            <td>Group Exhibition</td>
+            <td>2025</td>
+            <td>Nitja</td>
+            <td>8000 NOK</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>8</td>
+          </tr>
 
-          <input type="text" name="institution" placeholder="Institution Name" required>
-          <input type="text" name="artist_fee" placeholder="Exhibition Fee">
-          <input type="text" name="production_fee" placeholder="Production Fee">
-          <input type="text" name="vederlag" placeholder="Vederlag">
-          <input type="text" name="travel" placeholder="Travel Support (amount)">
-          <input type="text" name="tecnhical_support" placeholder="Tecnhical Support (days)">
+           <tr>
+            <td>Group Exhibition</td>
+            <td>2024</td>
+            <td>Hvitsten Salong</td>
+            <td>30000 NOK</td>
+            <td>5000 NOK </td>
+            <td>No</td>
+            <td>No</td>
+            <td>7</td>
+          </tr>
+           
+          <tr>
+            <td>Individual</td>
+            <td>2023</td>
+            <td>Nitja</td>
+            <td>50000 NOK</td>
+            <td>N/A</td>
+            <td>No</td>
+            <td>No</td>
+            <td>8</td>
+          </tr>
 
-          <button type="submit">Send</button>
-        </form>
-      </section>
-    </main>
+          <tr>
+            <td>Individual</td>
+            <td>2023</td>
+            <td>Kunstgarasjen</td>
+            <td>7500 NOK</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>Individual</td>
+            <td>2023</td>
+            <td>K-U-K</td>
+            <td>5000 NOK</td>
+            <td>5000 NOK</td>
+            <td>5000 NOK</td>
+            <td>N/A</td>
+            <td>7</td>
+          </tr>
+
+          <tr>
+            <td>Group Exhibition</td>
+            <td>2022</td>
+            <td>ROM for kunst og arkitektur</td>
+            <td>10000 NOK</td>
+            <td>10000 NOK</td>
+            <td>No</td>
+            <td>No</td>
+            <td>1</td>
+          </tr>
+           
+            <tr>
+            <td>Individual</td>
+            <td>2022</td>
+            <td>Trondheim Elektroniske Kunstsenter</td>
+            <td>10000 NOK</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td>3</td>
+          </tr>
+
+          <tr>
+            <td>Group Exhibition</td>
+            <td>2022</td>
+            <td>Nasjonalmuseet</td>
+            <td>15000 NOK</td>
+            <td>Etter avtale</td>
+            <td>No</td>
+            <td>No</td>
+            <td>20</td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script>
-    const yearSelect = document.querySelector('select[name="year"]');
-    for (let y = 2020; y <= 2035; y++) {
-      const option = document.createElement('option');
-      option.value = y;
-      option.textContent = y;
-      yearSelect.appendChild(option);
+    // Your filtering and sorting scripts remain unchanged.
+    const filterFormat = document.getElementById('filterFormat');
+    const filterYear = document.getElementById('filterYear');
+    const searchInstitution = document.getElementById('searchInstitution');
+    const table = document.getElementById('feeTable');
+    const tbody = table.tBodies[0];
+
+    function filterTable() {
+      const formatValue = filterFormat.value.toLowerCase();
+      const yearValue = filterYear.value.toLowerCase();
+      const searchValue = searchInstitution.value.toLowerCase();
+
+      Array.from(tbody.rows).forEach(row => {
+        const format = row.cells[0].textContent.toLowerCase();
+        const year = row.cells[1].textContent.toLowerCase();
+        const institution = row.cells[2].textContent.toLowerCase();
+
+        const matchesFormat = formatValue === '' || format === formatValue;
+        const matchesYear = yearValue === '' || year === yearValue;
+        const matchesSearch = institution.includes(searchValue);
+
+        row.style.display = matchesFormat && matchesYear && matchesSearch ? '' : 'none';
+      });
+    }
+
+    filterFormat.addEventListener('change', filterTable);
+    filterYear.addEventListener('change', filterTable);
+    searchInstitution.addEventListener('input', filterTable);
+
+    function sortTable(colIndex) {
+      const rowsArray = Array.from(tbody.rows);
+      const isNumeric = colIndex === 1 || colIndex === 3 || colIndex === 4;
+      const asc = tbody.getAttribute('data-sort-dir') !== 'asc';
+
+      rowsArray.sort((a, b) => {
+        let valA = a.cells[colIndex].textContent.trim();
+        let valB = b.cells[colIndex].textContent.trim();
+
+        if (isNumeric) {
+          valA = parseFloat(valA.replace(/[^\d.]/g, '')) || 0;
+          valB = parseFloat(valB.replace(/[^\d.]/g, '')) || 0;
+        }
+
+        if (valA < valB) return asc ? -1 : 1;
+        if (valA > valB) return asc ? 1 : -1;
+        return 0;
+      });
+
+      rowsArray.forEach(row => tbody.appendChild(row));
+      tbody.setAttribute('data-sort-dir', asc ? 'asc' : 'desc');
     }
   </script>
 </body>
