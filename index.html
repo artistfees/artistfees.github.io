@@ -242,8 +242,8 @@
       display: none;
     }
     .contact-form button {
-      background-color: #ffffe6;
-      color: #4A2C2A;
+      background-color: #34080B;
+      color: #ffffe6;
       border: none;
       padding: 0.5em;
       font-size: 17px;
@@ -253,9 +253,22 @@
       width: 100%;
       max-width: none;
       text-align: left;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     }
-    .contact-form button:hover {
+    .contact-form button:hover, .contact-form button:focus {
       background-color: #ffffe6;
+      color: #34080B;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: underline;
+      box-shadow: 0 1px 4px rgba(52,8,11,0.10);
+    }
+    .contact-form button:active {
+      background-color: #ffffe6;
+      color: #34080B;
+      box-shadow: 0 1px 4px rgba(52,8,11,0.10);
+      text-decoration: underline;
+      font-weight: bold;
     }
     @media (max-width: 900px) {
       .main-flex {
