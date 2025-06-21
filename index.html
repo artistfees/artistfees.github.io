@@ -3,525 +3,767 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Artist Fee Archive Norway</title>
-  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.counter.dev/script.js" data-id="dad985f2-4cf5-45ef-983b-e17b014b5c75" data-utcoffset="1"></script>
 
+  <!-- SEO metadata -->
+  <meta name="description" content="BUTCHER & CORREIA is an interdisciplinary artist duo. Explore his portfolio, CV, and contact information." />
+  <meta name="keywords" content="BUTCHER & CORREIA, Katherine Butcher, Carlos A. Correia, artist, portfolio, contemporary art, visual art" />
+  <meta name="author" content="BUTCHER & CORREIA" />
+  
+  <!-- Open Graph (OG) metadata -->
+  <meta property="og:title" content="BUTCHER & CORREIA - " />
+  <meta property="og:description" content="Explore the portfolio, CV, and contact information for Carlos A. Correia." />
+  <meta property="og:image" content="https://butchercorreia.com" />
+  <meta property="og:url" content="https://butchercorreia.com" />
+  <meta property="og:type" content="website" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <title>BUTCHER & CORREIA</title>
   <style>
-    body {
-      background-color: #ffffe6;
-      font-family: "PT Serif", serif;
-      font-size: 24px;
+    html, body {
       margin: 0;
-      padding: 0 2em 2em;
-      color: #34080B;
+      font-family: Georgia, serif;
+      height: 100%;
+      background-color: transparent;
+      min-height: 100vh;
+    }
+    body { min-height: 100vh; position: relative; }
+
+    #draggable-bg {
+      position: fixed;
+      z-index: 0;
+      top: 50%;
+      left: 50%;
+      width: 15vw;
+      min-width: 180px;
+      max-width: 540px;
+      height: auto;
+      pointer-events: auto;
+      transform: translate(-50%, -50%);
+      user-select: none;
+      cursor: move;
+      opacity: 1;
+    }
+    #draggable-bg img {
+      width: 100%; height: auto; display: block;
+      pointer-events: none; user-drag: none; user-select: none;
     }
 
-    header {
+    #modal-overlay {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: transparent; /* Invisible but still captures clicks */
+      pointer-events: auto;
+    }
+
+    .site-title-box {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      cursor: move;
+      background: transparent;
+      padding: 0 0 0 0;
+      min-width: 0;
+      width: auto;
+      max-width: 90vw;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 1.5em 0 0.5em;
-      flex-wrap: wrap;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .site-title-underline {
+      display: inline-block;
+      border-bottom: 4px dashed #ff4000;
+      padding-bottom: 2px;
     }
 
     .site-title {
-      font-weight: 700;
-      font-size: 24px;
-      margin: 0;
-      color: #34080B;
+      font-size: 1.5rem; font-weight: bold; background: transparent;
+      color: #000; border: none; margin: 0; padding: 0;
+      box-sizing: border-box; line-height: 1.2;
+      white-space: nowrap; pointer-events: none; user-select: none;
+      display: block; text-align: center;
     }
 
-    nav {
-      display: flex;
-      gap: 2em;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #34080B;
-      font-weight: 700;
-      font-size: 17px;
-    }
-
-    nav a:hover,
-    nav a:focus {
-      color: #34080B;
-      text-decoration: underline;
-    }
-
-    nav a:active {
-      color: #34080B;
-      text-decoration: underline;
-    }
-
-    .filters {
-      margin-top: 2em;
-      display: flex;
-      gap: 1em;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .filters select,
-    .filters input[type="text"] {
-      font-family: "PT Serif", serif;
-      font-size: 17px;
-      padding: 0.5em;
-      padding-right: 2em;
-      border: 3px solid #34080B;
-      border-radius: 0;
-      background-color: transparent;
-      color: #34080B;
-      box-sizing: border-box;
-      appearance: none;
-      max-width: 200px;
-      cursor: pointer;
-    }
-
-    .filters select {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334080B'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0.6em center;
-      background-size: 0.8em;
-    }
-
-    .filters select::-ms-expand {
-      display: none;
-    }
-
-    .filters input[type="text"] {
-      max-width: 250px;
-    }
-
-    /* Table wrapper to handle scrolling */
-    .table-wrapper {
-      margin-top: 1.5em;
-      border: 0px solid #34080B; /* same border as table */
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed;
-      border: none; /* border on wrapper instead */
-    }
-
-    th, td {
-      border: 3px solid #34080B;
-      padding: 0.5em 0.75em;
-      text-align: left;
-      font-size: 17px;
-      color: #34080B;
-      word-wrap: break-word;
-      background-color: transparent;
+    .nav-column {
+      position: fixed; top: 20px; left: 20px;
+      display: flex; flex-direction: column; gap: 0.3rem;
+      background: transparent; cursor: move; z-index: 2000;
     }
     
-      th {
-        font-weight: 700;
-        cursor: pointer;
-        position: sticky;
-        top: 0;
-        background-color: #34080B;
-        color: #ffffe6;
-        z-index: 2;
-        border: 3px solid #34080B;
-      }
-
-    tbody tr:nth-child(even) {
-      background-color: transparent;
+    .nav-column-2nd {
+      position: fixed; top: 20px; left: 250px;
+      display: flex; flex-direction: column; gap: 0.3rem;
+      background: transparent; cursor: move; z-index: 2000;
+    }
+    
+    .nav-column a { color: #000; text-decoration: none; font-size: 1.1rem; cursor: pointer; }
+    .nav-column a:hover,
+    .nav-column a.active {
+      color: #ff4000;
+      font-weight: normal;
     }
 
-    .main-flex {
-      display: flex;
-      gap: 4em;
-      align-items: flex-start;
-      margin-top: 2em;
-    }
-    .info-text,
-    .contact-form {
-      flex: 1 1 0;
-      width: 50%;
-      max-width: none;
-      margin-top: 0;
-      align-self: flex-start;
-    }
-    .info-text > *:first-child {
-      margin-top: 0;
-    }
-    .contact-form {
-      flex: 1 1 0;
-      max-width: 800px;
-      margin-left: auto;
-      display: flex;
-      flex-direction: column;
-      align-self: flex-start;
-    }
-    .contact-form form {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-    .contact-form input,
-    .contact-form select {
-      width: 100%;
-      max-width: none;
-      margin: 0 0 1em 0;
-      padding: 0.5em;
-      padding-right: 2em;
-      font-size: 17px;
-      border: 3px solid #34080B;
-      border-radius: 0;
-      background-color: transparent;
-      font-family: "PT Serif", serif;
-      box-sizing: border-box;
-      appearance: none;
-      color: #34080B;
-    }
-    .contact-form select {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334080B'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0.6em center;
-      background-size: 0.8em;
-      cursor: pointer;
-    }
-    .contact-form select::-ms-expand {
+    .popup {
+      position: fixed;
+      top: 50%; left: 45%; transform: translate(-50%, -50%);
+      background-color: #fff;
+      border: 4px dashed #ff4000;
+      padding: 2rem;
+      width: 400px; min-width: 350px; max-width: 90%; 
+      height: 500px; min-height: 440px; max-height: 90%;
+      box-shadow: 10px 10px 0 #ff4000;
+      z-index: 1100;
       display: none;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: #fff;
+      max-height: 80vh;
+      height: auto;
+      box-sizing: border-box;
     }
-    .contact-form button {
-      background-color: #34080B;
-      color: white;
+    .popup-secondary {
+      position: fixed;
+      top: 55%; left: 55%; transform: translate(-50%, -50%);
+      background-color: #fff;
+      border: 4px dashed #ff4000;
+      padding: 2rem;
+      width: auto;
+      max-width: 90%;
+      min-width: 300px;
+      min-height: 350px;
+      max-width: 70vw;
+      max-height: 80vh;
+      box-shadow: 10px 10px 0 #ff4000;
+      z-index: 1200;
+      display: none;
+      background: #fff;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: auto;
+      box-sizing: border-box;
+    }
+    .popup .close-btn,
+    .popup-secondary .close-btn,
+    .popup .plus-btn,
+    .popup-secondary .plus-btn,
+    .popup .link-btn,
+    .popup-secondary .link-btn {
+      right: 10px;
+      left: unset;
+      position: absolute;
+      z-index: 401;
       border: none;
-      padding: 0.5em;
-      font-size: 17px;
-      font-weight: 700;
-      font-family: "PT Serif", serif;
+      background: none;
       cursor: pointer;
-      width: 100%;
-      max-width: none;
-      text-align: left;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .contact-form button:hover {
-      background-color: #2a0608;
+    .popup .resize-button,
+    .popup-secondary .resize-button {
+      top: 5px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      background: transparent;
+      cursor: pointer;
+      z-index: 400;
+      padding: 0;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    @media (max-width: 900px) {
-      .main-flex {
-        flex-direction: column;
-        gap: 1em;
-      }
-      .info-text, .contact-form {
-        max-width: 100%;
-        width: 100%;
-        margin-left: 0;
-      }
+    .popup .close-btn,
+    .popup-secondary .close-btn { top: 30px; }
+    .popup .plus-btn,
+    .popup-secondary .plus-btn { top: 55px; }
+    .popup .link-btn,
+    .popup-secondary .link-btn { top: 80px; }
+    .popup .close-btn img,
+    .popup .plus-btn img,
+    .popup .link-btn img,
+    .popup-secondary .close-btn img,
+    .popup-secondary .plus-btn img,
+    .popup-secondary .link-btn img {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+    .footnote-wrapper {
+      position: fixed; bottom: 20px; left: 40px; z-index: 500;
+      background: transparent; cursor: move; white-space: nowrap;
+      pointer-events: auto; display: block !important;
+    }
+    .footnote {
+      transform: rotate(-90deg); transform-origin: left bottom;
+      font-size: 0.9rem; background: transparent;
+      padding: 2px 8px; color: #333; display: block;
+    }
+
+    .popup,
+    .popup-secondary {
+      scrollbar-width: thin;              /* For Firefox */
+      scrollbar-color: #ff4000 #fff;      /* For Firefox */
+    }
+    .popup::-webkit-scrollbar,
+    .popup-secondary::-webkit-scrollbar {
+      width: 8px;
+      background: #fff;
+    }
+    .popup::-webkit-scrollbar-thumb,
+    .popup-secondary::-webkit-scrollbar-thumb {
+      background: #ff4000;
+      border-radius: 4px;
     }
 
     @media (max-width: 768px) {
       body {
-        padding: 0 1em 1em;
+        padding: 0;
       }
-
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5em;
+      .site-title-box {
+        position: fixed;
+        width: 100vw;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background: #fff;
+        z-index: 3000;
+        margin: 0;
+        padding: 0em 0em 0em 0em;
+        min-height: 48px;
       }
-
+      .site-title-underline {
+        border-bottom: 2px dashed #ff4000;
+        width: auto;
+        text-align: left;
+      }
       .site-title {
-        order: 0;
-        font-size: 20px;
-        margin-bottom: 0.25em;
+        font-size: 1.1rem;
+        margin-left: 0.5em;
+        margin-top: 0.5em
       }
-
-      nav {
+      .nav-column, .nav-column-2nd {
+        display: none !important;
+      }
+      .burger-menu {
+        display: block !important;
+        position: fixed;
+        top: 0.5em;
+        right: 0.5em;
+        z-index: 4000;
+        background: none;
+        border: none;
+        font-size: 2em;
+        color: #ff4000;
+        cursor: pointer;
+      }
+      #mobileNavPopup {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(255,255,255,0.98);
+        z-index: 5000;
         flex-direction: column;
-        gap: 0.2em;
-        order: 1;
-        width: 100%;
+        justify-content: center;
+        align-items: center;
       }
-
-      nav a {
-        font-size: 16px;
+      #mobileNavPopup.active {
+        display: flex !important;
       }
-
-      .filters {
-        margin-top: 1em;
-        gap: 0.1em;
+      #mobileNavPopup .mobile-nav-links {
+        display: flex;
         flex-direction: column;
-        align-items: stretch;
+        gap: 2em;
+        align-items: center;
       }
-
-      .filters select,
-      .filters input[type="text"] {
-        max-width: 100%;
+      #mobileNavPopup .close-mobile-nav {
+        position: absolute;
+        top: 1.2em;
+        right: 1.2em;
+        font-size: 2.2em;
+        background: none;
+        border: none;
+        color: #ff4000;
+        cursor: pointer;
       }
-
-      .table-wrapper {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        width: 100%;
+      .footnote-wrapper {
+        position: fixed;
+        left: 0.5em;
+        bottom: 0.5em;
+        z-index: 6000;
+        background: transparent;
+        pointer-events: auto;
+        display: block !important;
+        transform: none;
       }
-    
-      table {
-        width: auto; /* Let table grow horizontally */
-        min-width: 600px; /* or whatever width triggers scroll */
+      .footnote {
+        transform: none;
+        font-size: 0.7em;
+        color: #333;
+        background: transparent;
+        padding: 1px 5px;
       }
-
+      .popup, .popup-secondary {
+        position: fixed;
+        top: 5em;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 96vw;
+        max-width: 96vw;
+        min-width: unset;
+        min-height: 800px;
+        max-height: 70vh;
+        height: auto;
+        overflow-y: auto !important;
+        overflow-x: hidden;
+        box-sizing: border-box;
+        padding: 1em;
+        background:#fff
+        border-width: 3px;
+        touch-action: auto;
+        display: none;
+      }
+      .popup[style*="display: block"], .popup-secondary[style*="display: block"] {
+        display: block !important;
+      }
+    }
+    @media (min-width: 769px) {
+      .burger-menu, #mobileNavPopup {
+        display: none !important;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <nav>
-        <a href="index.html">entries</a>
-        <a href="about.html">submit</a>
-      </nav>
-      <h1 class="site-title">Artist Fee Archive Norway</h1>
-    </header>
+  <div id="draggable-bg" class="draggable">
+    <img src="landingimage2.jpg" alt="Landing Image" draggable="false" />
+  </div>
 
-    <div class="filters">
-      <select id="filterFormat" aria-label="Exhibition Format">
-        <option value="">Exhibition format</option>
-        <option value="Individual">Individual</option>
-        <option value="Group Exhibition">Group Exhibition</option>
-        <option value="Duo Show">Duo Show</option>
-      </select>
+  <div id="modal-overlay"></div>
 
-      <select id="filterYear" aria-label="Year">
-        <option value="">Year</option>
-        <option>2020</option>
-        <option>2021</option>
-        <option>2022</option>
-        <option>2023</option>
-        <option>2024</option>
-        <option>2025</option>
-        <option>2026</option>
-        <option>2027</option>
-        <option>2028</option>
-        <option>2029</option>
-        <option>2030</option>
-      </select>
+  <div class="site-title-box draggable">
+    <span class="site-title-underline">
+      <span class="site-title">BUTCHER & CORREIA</span>
+    </span>
+  </div>
 
-      <input type="text" id="searchInstitution" placeholder="Search Institution" aria-label="Search Institution" />
+  <div class="nav-column draggable">
+    <a onclick="showPopup('sound-of-things', this)">The Sound of Things</a>
+    <a onclick="showPopup('just-this', this)">Just This And Only That</a>
+    <a onclick="showPopup('taste-of-sound', this)">Taste of Sound</a>
+    <a onclick="showPopup('performance-vista', this)">Performance Vista</a>
+    <a onclick="scrollToAnonymousSubmission()">anonymous submission</a>
+  </div>
+
+  <div class="nav-column nav-column-2nd draggable">
+    <a onclick="showPopup('about', this)">About</a>
+    <a onclick="showPopup('imagery', this)">Imagery</a>
+  </div>
+
+  <div id="popupContainer" class="popup draggable">
+    <button class="close-btn" onclick="closePopup()"><img src="icons/Signs_close.jpg" alt="Close" style="width:20px;height:20px;"></button>
+    <div id="popupContent"></div>
+    <button class="plus-btn" onclick="handlePlusClick()"><img src="icons/Signs_plus.jpg" alt="Plus" style="width:20px;height:20px;"></button>
+    <button class="link-btn" onclick="handleLinkClick()"><img src="icons/Signs_link.jpg" alt="Link" style="width:20px;height:20px;"></button>
+  </div>
+
+  <div id="secondPopup-sound-of-things" class="popup-secondary draggable">
+    <button class="close-btn" onclick="closeSecondPopup('sound-of-things')"><img src="icons/Signs_close.jpg" alt="Close" style="width:20px;height:20px;"></button>
+    <button class="plus-btn" onclick="handlePlusClick()"><img src="icons/Signs_plus.jpg" alt="Plus" style="width:20px;height:20px;"></button>
+    <button class="link-btn" onclick="handleLinkClick()"><img src="icons/Signs_link.jpg" alt="Link" style="width:20px;height:20px;"></button>
+    <div>
+      <div style="padding:56.25% 0 0 0;position:relative;">
+        <iframe src="https://player.vimeo.com/video/1093466451?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="The Sound of Things"></iframe>
+      </div>
     </div>
+  </div>
+  <div id="secondPopup-just-this" class="popup-secondary draggable">
+    <button class="close-btn" onclick="closeSecondPopup('just-this')"><img src="icons/Signs_close.jpg" alt="Close" style="width:20px;height:20px;"></button>
+    <button class="plus-btn" onclick="handlePlusClick()"><img src="icons/Signs_plus.jpg" alt="Plus" style="width:20px;height:20px;"></button>
+    <button class="link-btn" onclick="handleLinkClick()"><img src="icons/Signs_link.jpg" alt="Link" style="width:20px;height:20px;"></button>
+    <div><iframe src="https://justthisandonlythat.com" width="600" height="400"></iframe></div>
+  </div>
+  <div id="secondPopup-taste-of-sound" class="popup-secondary draggable">
+    <button class="close-btn" onclick="closeSecondPopup('taste-of-sound')"><img src="icons/Signs_close.jpg" alt="Close" style="width:20px;height:20px;"></button>
+    <button class="plus-btn" onclick="handlePlusClick()"><img src="icons/Signs_plus.jpg" alt="Plus" style="width:20px;height:20px;"></button>
+    <button class="link-btn" onclick="handleLinkClick()"><img src="icons/Signs_link.jpg" alt="Link" style="width:20px;height:20px;"></button>
+    <div><strong>Secondary popup for Taste of Sound</strong><br>Extra content here.</div>
+  </div>
+  <div id="secondPopup-performance-vista" class="popup-secondary draggable">
+    <button class="close-btn" onclick="closeSecondPopup('performance-vista')"><img src="icons/Signs_close.jpg" alt="Close" style="width:20px;height:20px;"></button>
+    <button class="plus-btn" onclick="handlePlusClick()"><img src="icons/Signs_plus.jpg" alt="Plus" style="width:20px;height:20px;"></button>
+    <button class="link-btn" onclick="handleLinkClick()"><img src="icons/Signs_link.jpg" alt="Link" style="width:20px;height:20px;"></button>
+    <img src="images/performancevista.jpg" alt="map" width="400">
+    <img src="images/performancevista2.jpeg" alt="sketch" width="400">
+    <a href="images/performance vista_leaflet.pdf" target="_blank">Performance Vista leaflet</a>
+  </div>
+  <div id="secondPopup-about" class="popup-secondary draggable">
+    <button class="close-btn" onclick="closeSecondPopup('about')"><img src="icons/Signs_close.jpg" alt="Close" style="width:20px;height:20px;"></button>
+    <button class="plus-btn" onclick="handlePlusClick()"><img src="icons/Signs_plus.jpg" alt="Plus" style="width:20px;height:20px;"></button>
+    <button class="link-btn" onclick="handleLinkClick()"><img src="icons/Signs_link.jpg" alt="Link" style="width:20px;height:20px;"></button>
+    <div><strong>cv</strong><br>
+      upcoming<br>
+      2026/2027  Norsk billedhoggerforening, Oslo (NO)<br>
+      2026    Group show — Trondheimsbiennalen (NO)<br>
+      2025    Costume design for SOLO by Rannei Grenne, BABEL, Trondheim and Kunstrom Jakob, Steinkjer (NO)</p>
+       <p>2025    The Sound of Things, performance by Klaus E. Holm & Katherine Butcher, with Ieva Grigelionyte and Ensemble Aksiom - OnlyConnect at Rosendal Teater, Trondheim (NO)</p>
+      2024    Just This And Only That, performance in public realm, Trøndelag (NO) - ongoing<br>
+      2023    Taste of Sound, performance in collaboration with Klaus Ellerhusen Holm and Martin Moen Mosti - KunstFest 23 at Rotvoll kunstnerkollektiv, Trondheim (NO)<br>
+      2023    net, nett, nether - Heimdal Kunstforening, Trondheim (NO)<br>
+      2022    Unlikely the same as yesterday - Grenseløs, Trondheim (NO)<br></div>
+  </div>
 
-    <div class="table-wrapper">
-      <table id="feeTable" aria-label="Artist Fee Archive table">
-        <thead>
-          <tr>
-            <th onclick="sortTable(0)">Exhibition Format</th>
-            <th onclick="sortTable(1)">Year</th>
-            <th onclick="sortTable(2)">Institution</th>
-            <th>Exhibition Fee p/ Artist</th>
-            <th>Production Fee p/ Artist</th>
-            <th>Vederlag p/ Artist</th>
-            <th>Travel support</th>
-            <th>Technical Support (Days)</th>
-          </tr>
-        </thead>
-         <tbody>
-          <tr>
-            <td>Individual</td>
-            <td>2026</td>
-            <td>UKS</td>
-            <td>30000 NOK</td>
-            <td>30000 NOK</td>
-            <td>Ja</td>
-            <td>N/A</td>
-            <td>N/A</td>
-            </tr>
-          
-           <tr>
-            <td>Duo Show</td>
-            <td>2026</td>
-            <td>BABEL visningsrom</td>
-            <td>6000 NOK</td>
-            <td>No</td>
-            <td>No</td>
-            <td>N/A</td>
-            <td>N/A</td>  
-          </tr>
-           
-          <tr>
-            <td>Group Exhibition</td>
-            <td>2025</td>
-            <td>Nitja</td>
-            <td>8000 NOK</td>
-            <td>N/A</td>
-            <td>N/A</td>
-            <td>N/A</td>
-            <td>8</td>
-          </tr>
+  <!-- Anonymous Submission Section -->
+  <div id="anonymous-submission" style="margin-top: 100px; padding: 2em 1em; background: #fff; max-width: 600px; margin-left: auto; margin-right: auto; border: 2px dashed #ff4000;">
+    <h2>Anonymous Submission</h2>
+    <p>Submit your entry anonymously using the form below:</p>
+    <form>
+      <label for="submission-text">Your entry:</label><br>
+      <textarea id="submission-text" name="submission-text" rows="4" style="width:100%"></textarea><br>
+      <button type="submit" style="margin-top: 1em; background: #ff4000; color: #fff; border: none; padding: 0.5em 1.5em; cursor: pointer;">Submit</button>
+    </form>
+  </div>
 
-           <tr>
-            <td>Group Exhibition</td>
-            <td>2024</td>
-            <td>Hvitsten Salong</td>
-            <td>30000 NOK</td>
-            <td>5000 NOK </td>
-            <td>No</td>
-            <td>No</td>
-            <td>7</td>
-          </tr>
-           
-          <tr>
-            <td>Individual</td>
-            <td>2023</td>
-            <td>Nitja</td>
-            <td>50000 NOK</td>
-            <td>N/A</td>
-            <td>No</td>
-            <td>No</td>
-            <td>8</td>
-          </tr>
+  <div class="footnote-wrapper draggable" id="footnote">
+    <div class="footnote">© 2025 BUTCHER & CORREIA<br>all entries were anonymously submited by artists</div>
+  </div>
 
-          <tr>
-            <td>Individual</td>
-            <td>2023</td>
-            <td>Kunstgarasjen</td>
-            <td>7500 NOK</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
-          </tr>
-
-          <tr>
-            <td>Individual</td>
-            <td>2023</td>
-            <td>K-U-K</td>
-            <td>5000 NOK</td>
-            <td>5000 NOK</td>
-            <td>5000 NOK</td>
-            <td>N/A</td>
-            <td>7</td>
-          </tr>
-
-          <tr>
-            <td>Group Exhibition</td>
-            <td>2022</td>
-            <td>ROM for kunst og arkitektur</td>
-            <td>10000 NOK</td>
-            <td>10000 NOK</td>
-            <td>No</td>
-            <td>No</td>
-            <td>1</td>
-          </tr>
-           
-            <tr>
-            <td>Individual</td>
-            <td>2022</td>
-            <td>Trondheim Elektroniske Kunstsenter</td>
-            <td>10000 NOK</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
-            <td>3</td>
-          </tr>
-
-          <tr>
-            <td>Group Exhibition</td>
-            <td>2022</td>
-            <td>Nasjonalmuseet</td>
-            <td>15000 NOK</td>
-            <td>Etter avtale</td>
-            <td>No</td>
-            <td>No</td>
-            <td>20</td>
-        </tr>
-
-        </tbody>
-      </table>
+<!-- Add burger menu button and mobile nav popup -->
+  <button class="burger-menu" id="burgerMenuBtn" aria-label="Open navigation" style="display:none;">&#9776;</button>
+  <div id="mobileNavPopup">
+    <button class="close-mobile-nav" aria-label="Close navigation">&times;</button>
+    <div class="mobile-nav-links">
+      <a onclick="showPopup('sound-of-things', this); closeMobileNav();">The Sound of Things</a>
+      <a onclick="showPopup('just-this', this); closeMobileNav();">Just This And Only That</a>
+      <a onclick="showPopup('taste-of-sound', this); closeMobileNav();">Taste of Sound</a>
+      <a onclick="showPopup('performance-vista', this); closeMobileNav();">Performance Vista</a>
+      <a onclick="showPopup('about', this); closeMobileNav();">About</a>
+      <a onclick="showPopup('imagery', this); closeMobileNav();">Imagery</a>
+      <a onclick="closeMobileNav(); scrollToAnonymousSubmission();">anonymous submission</a>
     </div>
+  </div>
 
-    <div class="main-flex">
-      <section class="info-text">
-        <p>This website is for visual artists to gain a better overview of fees practiced by various institutions in Norway.</p>
-        <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with the different institutions.</p>
-        <p>Each anonymous submission helps keep this archive active and growing.</p>
-        <p>These are two links regarding rates in the field:
-          <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank" rel="noopener noreferrer">Norskebilledkunstnere</a><br>
-          <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank" rel="noopener noreferrer">Norskekunsthandverkere</a>
-        </p>
-      </section>
-      <section class="contact-form">
-        <form action="https://formsubmit.co/9670ffa316e509cc8f9a647b882641f2" method="POST">
-          <input type="hidden" name="_captcha" value="false">
-          <select name="exhibition_format" required>
-            <option value="" disabled selected>Exhibition Format</option>
-            <option value="Individual">Individual</option>
-            <option value="Group Exhibition">Group Exhibition</option>
-            <option value="Duo Show">Duo Show</option>
-          </select>
-          <select name="year" required>
-            <option value="" disabled selected>Year</option>
-          </select>
-          <input type="text" name="institution" placeholder="Institution Name" required>
-          <input type="text" name="artist_fee" placeholder="Exhibition Fee">
-          <input type="text" name="production_fee" placeholder="Production Fee">
-          <input type="text" name="vederlag" placeholder="Vederlag">
-          <input type="text" name="travel" placeholder="Travel Support (amount)">
-          <input type="text" name="tecnhical_support" placeholder="Tecnhical Support (days)">
-          <button type="submit">Send</button>
-        </form>
-      </section>
-    </div>
-  </div> <!-- end .container -->
+<script>
+let currentPopupId = null;
 
-  <script>
-    // Your filtering and sorting scripts remain unchanged.
-    const filterFormat = document.getElementById('filterFormat');
-    const filterYear = document.getElementById('filterYear');
-    const searchInstitution = document.getElementById('searchInstitution');
-    const table = document.getElementById('feeTable');
-    const tbody = table.tBodies[0];
+const contentData = {
+  "sound-of-things": `
+    Performance, 60 min.<br>
+    Only Connect 2025, Rosendal Teater - Trondheim, 2025<br>
+    <p><strong>The Sound of Things</strong> is a collaborative, interdisciplinary performance conceived by Klaus Ellerhusen Holm (NO) and Katherine Butcher (AU), developed with Carlos A. Correia (PT), and featuring interdisciplinary artist in taste Ieva Grigelionyte (LT/UK). Aksiom Ensemble performs the sound composition.</p>
+    Concept: Katherine Butcher and Klaus Ellerhusen Holm, developed with Carlos A. Correia<br>
+    Sound Composition: Klaus E. Holm<br>
+    Visuals & Dramaturgy: BUTCHER & CORREIA<br>
+    Sound: Aksiom Ensemble<br>
+    Food: Ieva Grigelionyte<br>
+    Light design: Abigail Nava<br>
+    Light tecnhician: Torbjørn Benjaminsen<br>
+    Supported by: Trondheim kommune, Nettle T.O.C., Culligan
+  `,
+  "just-this": `
+    2.01.2024–on going<br>
+    <p><strong>Just This and Only That</strong> is a deliberately slow and participatory performative project that interweaves sustainability, art and community. We enter the project from a position of partial knowledge in order to create a new dialogue about sustainable living in our region. The project focuses on materiality, the textiles we wear on our bodies in both work and life, to examine our allocation of resources to meet our need for freedom of shelter, movement and expression. Our performative actions are committed to the awareness of the present moment. Through 'Just This And Only That' we step forward to act in new artistic constellations to encourage shared responsibility, unexpected discoveries and evolving identities.</p>
+    <a href="https://justthisandonlythat.com">justthisandonlythat.com</a><br>
+    Supported by: Kulturdirektoratet
+  `,
+  "taste-of-sound": `
+    Performance, 60 min.<br>
+    KunstFest, Rotvoll Kunstnerkollektiv - Trondheim, 2023<br><br>
+    <p>Layers of plasticity: elements such as background music, tableware, packaging design, lighting hues, and even menu item names have been recognized as significant factors that shape our perception of taste.</p>
+    <p><strong>Taste of Sound</strong> explores the possibilities of multisensory input while investigating how the activation of multiple sensory impressions simultaneously can provide new and curious personal imagery. The performance interweaves sound, flavor, and visual impressions. Through manipulation of these elements, our gestures aim to challenge your sense of flavor, unveil novel and unexpected soundscapes, and challenge conventional taste perceptions by altering the visual presentation of food. This event serves as a scaled-down preview of our comprehensive showcase scheduled for 2024.</p>
+    Concept: Katherine Butcher and Klaus Ellerhusen Holm, developed with Carlos A. Correia<br>
+    Visuals & Choreography: BUTCHER & CORREIA<br>
+    Sound: Klaus Ellerhusen Holm and Andreas Røysum<br>
+    Food: Martin Moen Mosti and Even Østby<br>
+    Event supported by: Rotvoll Kunstnerkollektiv - KunstFest, Norsk jazzforum and Norsk Komponistforening
+  `,
+  "performance-vista": `
+    Performance, anemometer, support jacks, lifting straps, construction helmets, reflective vests, and HOEFLON C10 crane. Variable dimensions.<br>
+    Group exhibition <strong>Unlikely the same as yesterday</strong>, GRENSELØS, Norway
+    <p><strong>Performance Vista</strong> is a pleasing sight between a long narrow row of trees; a succession of anticipated events, a vision, a view of a series of actions in the mind, a performance vista played out, unfolding retrospectively and prospectively.</p>
+    <a href="https://performancevista.com">performancevista.com</a><br>
+    <a href="https://instagram.com/performancevista">@performancevista</a>
+  `,
+  "about": `
+    we are Katherine BUTCHER & Carlos A. CORREIA<br>
+    studio [at] butchercorreia.com<br><br>
+    <p>BUTCHER & CORREIA ground their artistic process in an awareness of local and global political and social landscapes. Their work spans performance, immersive environments, and tangible objects, often critiquing contemporary issues like labor, hierarchy, regenerative practices, and social norms. Embracing intersectionality, they link climate justice with social justice, integrating environmental concerns into social and political narratives. Their art reflects a commitment to positive environmental and social change, fostering connections between art, nature, and shared human experience while underscoring the interdependence of climate and social equity.<br><br>
+    <img src="BCportrait.jpg" alt="Polaroid" width="200">
+  `
+};
 
-    function filterTable() {
-      const formatValue = filterFormat.value.toLowerCase();
-      const yearValue = filterYear.value.toLowerCase();
-      const searchValue = searchInstitution.value.toLowerCase();
+function showPopup(id, element) {
+  // Close all popups and remove active state
+  document.getElementById('popupContainer').style.display = 'none';
+  document.querySelectorAll('.popup-secondary').forEach(sp => sp.style.display = 'none');
+  document.querySelectorAll('.nav-column a').forEach(link => link.classList.remove('active'));
+  currentPopupId = null;
+  setOverlayVisibility();
 
-      Array.from(tbody.rows).forEach(row => {
-        const format = row.cells[0].textContent.toLowerCase();
-        const year = row.cells[1].textContent.toLowerCase();
-        const institution = row.cells[2].textContent.toLowerCase();
-
-        const matchesFormat = formatValue === '' || format === formatValue;
-        const matchesYear = yearValue === '' || year === yearValue;
-        const matchesSearch = institution.includes(searchValue);
-
-        row.style.display = matchesFormat && matchesYear && matchesSearch ? '' : 'none';
-      });
+  // Now, immediately open the new popup for the nav link
+  const popup = document.getElementById('popupContainer');
+  const content = document.getElementById('popupContent');
+  currentPopupId = id;
+  content.innerHTML = contentData[id] || 'No content found.';
+  popup.style.display = 'block';
+  if (element) element.classList.add('active');
+  setOverlayVisibility();
+  // Add resize button to main popup if not present
+  if (!popup.querySelector('.resize-button')) {
+    const button = document.createElement('div');
+    button.className = 'resize-button';
+    button.setAttribute('aria-label', 'resize');
+    button.setAttribute('tabindex', '-1');
+    button.innerHTML = `<img src="icons/Signs_expand1.jpg" alt="Resize" style="width:20px;height:20px;">`;
+    let isResizing = false;
+    let startX, startY, startWidth, startHeight;
+    button.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      isResizing = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      startWidth = parseInt(document.defaultView.getComputedStyle(popup).width, 10);
+      startHeight = parseInt(document.defaultView.getComputedStyle(popup).height, 10);
+      document.documentElement.addEventListener('mousemove', doResize);
+      document.documentElement.addEventListener('mouseup', stopResize);
+    });
+    function doResize(e) {
+      if (!isResizing) return;
+      popup.style.width = (startWidth + e.clientX - startX) + 'px';
+      popup.style.height = (startHeight + e.clientY - startY) + 'px';
     }
-
-    filterFormat.addEventListener('change', filterTable);
-    filterYear.addEventListener('change', filterTable);
-    searchInstitution.addEventListener('input', filterTable);
-
-    function sortTable(colIndex) {
-      const rowsArray = Array.from(tbody.rows);
-      const isNumeric = colIndex === 1 || colIndex === 3 || colIndex === 4;
-      const asc = tbody.getAttribute('data-sort-dir') !== 'asc';
-
-      rowsArray.sort((a, b) => {
-        let valA = a.cells[colIndex].textContent.trim();
-        let valB = b.cells[colIndex].textContent.trim();
-
-        if (isNumeric) {
-          valA = parseFloat(valA.replace(/[^\d.]/g, '')) || 0;
-          valB = parseFloat(valB.replace(/[^\d.]/g, '')) || 0;
-        }
-
-        if (valA < valB) return asc ? -1 : 1;
-        if (valA > valB) return asc ? 1 : -1;
-        return 0;
-      });
-
-      rowsArray.forEach(row => tbody.appendChild(row));
-      tbody.setAttribute('data-sort-dir', asc ? 'asc' : 'desc');
+    function stopResize() {
+      isResizing = false;
+      document.documentElement.removeEventListener('mousemove', doResize);
+      document.documentElement.removeEventListener('mouseup', stopResize);
     }
-  </script>
+    popup.appendChild(button);
+  }
+}
+
+function handlePlusClick() {
+  if (!currentPopupId) return;
+  openSecondPopup(currentPopupId);
+}
+
+function closeSecondPopup(id) {
+  if (!id) return;
+  const secondPopup = document.getElementById('secondPopup-' + id);
+  if (secondPopup) {
+    secondPopup.style.display = 'none';
+    setOverlayVisibility();
+  }
+}
+
+function closePopup() {
+  document.getElementById('popupContainer').style.display = 'none';
+  document.querySelectorAll('.popup-secondary').forEach(sp => sp.style.display = 'none');
+  document.querySelectorAll('.nav-column a').forEach(link => link.classList.remove('active'));
+  currentPopupId = null;
+  setOverlayVisibility();
+}
+
+function openSecondPopup(id) {
+  document.querySelectorAll('.popup-secondary').forEach(sp => sp.style.display = 'none');
+  const popup = document.getElementById(`secondPopup-${id}`);
+  if (!popup) return;
+  popup.style.display = 'block';
+  setOverlayVisibility();
+  if (!popup.querySelector('.resize-button')) {
+    const button = document.createElement('div');
+    button.className = 'resize-button';
+    button.setAttribute('aria-label', 'resize');
+    button.setAttribute('tabindex', '-1');
+    button.innerHTML = `
+      <img src="icons/Signs_expand1.jpg" alt="Resize" style="width:20px;height:20px;">
+    `;
+    let isResizing = false;
+    let startX, startY, startWidth, startHeight;
+    
+     button.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      isResizing = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      startWidth = parseInt(document.defaultView.getComputedStyle(popup).width, 10);
+      startHeight = parseInt(document.defaultView.getComputedStyle(popup).height, 10);
+      document.documentElement.addEventListener('mousemove', doResize);
+      document.documentElement.addEventListener('mouseup', stopResize);
+    });
+    
+    button.addEventListener('mousedown', (e) => {
+      isResizing = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      startWidth = parseInt(document.defaultView.getComputedStyle(popup).width, 10);
+      startHeight = parseInt(document.defaultView.getComputedStyle(popup).height, 10);
+      document.documentElement.addEventListener('mousemove', doResize);
+      document.documentElement.addEventListener('mouseup', stopResize);
+    });
+    function doResize(e) {
+      if (!isResizing) return;
+      popup.style.width = (startWidth + e.clientX - startX) + 'px';
+      popup.style.height = (startHeight + e.clientY - startY) + 'px';
+    }
+    function stopResize() {
+      isResizing = false;
+      document.documentElement.removeEventListener('mousemove', doResize);
+      document.documentElement.removeEventListener('mouseup', stopResize);
+    }
+    popup.appendChild(button);
+  }
+}
+
+function setOverlayVisibility() {
+  const mainPopup = document.getElementById("popupContainer");
+  const allSecondPopups = Array.from(document.querySelectorAll(".popup-secondary"));
+  const anyMainVisible = mainPopup && mainPopup.style.display !== "none";
+  const anySecondaryVisible = allSecondPopups.some(el => el.style.display !== "none");
+  const overlay = document.getElementById("modal-overlay");
+  overlay.style.display = (anyMainVisible || anySecondaryVisible) ? "block" : "none";
+}
+
+document.getElementById('modal-overlay').addEventListener('mousedown', function(e) {
+  if (e.target !== this) return;
+  const mainPopup = document.getElementById("popupContainer");
+  const allSecondPopups = Array.from(document.querySelectorAll(".popup-secondary"));
+  const visibleSecondPopup = allSecondPopups.find(el => el.style.display !== "none");
+  if (visibleSecondPopup) {
+    visibleSecondPopup.style.display = "none";
+    setOverlayVisibility();
+  } else if (mainPopup && mainPopup.style.display !== "none") {
+    closePopup();
+    setOverlayVisibility();
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' || e.key === 'Esc') {
+    const mainPopup = document.getElementById("popupContainer");
+    const allSecondPopups = Array.from(document.querySelectorAll(".popup-secondary"));
+    const visibleSecondPopup = allSecondPopups.find(el => el.style.display !== "none");
+    if (visibleSecondPopup) {
+      visibleSecondPopup.style.display = "none";
+      setOverlayVisibility();
+    } else if (mainPopup && mainPopup.style.display !== "none") {
+      closePopup();
+      setOverlayVisibility();
+    }
+  }
+});
+
+function makeDraggable(el) {
+  let offsetX = 0, offsetY = 0, startX = 0, startY = 0;
+  let isDragging = false;
+  let origZ = '';
+  el.onmousedown = dragMouseDown;
+  function dragMouseDown(e) {
+    // Ignore if the target is the resize button or inside it
+    if (e.target.closest('.resize-button')) return;
+    if (e.button !== 0) return;
+    e.preventDefault();
+    isDragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    origZ = el.style.zIndex;
+    el.style.zIndex = 2000;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+  function elementDrag(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    offsetX = startX - e.clientX;
+    offsetY = startY - e.clientY;
+    startX = e.clientX;
+    startY = e.clientY;
+    el.style.top = (el.offsetTop - offsetY) + "px";
+    el.style.left = (el.offsetLeft - offsetX) + "px";
+  }
+  function closeDragElement() {
+    isDragging = false;
+    el.style.zIndex = origZ;
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+window.onload = function () {
+  document.querySelectorAll('.draggable').forEach(el => {
+    makeDraggable(el);
+  });
+};
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.draggable').forEach(makeDraggable);
+});
+
+// Mobile burger menu logic
+function openMobileNav() {
+  document.getElementById('mobileNavPopup').classList.add('active');
+}
+function closeMobileNav() {
+  document.getElementById('mobileNavPopup').classList.remove('active');
+}
+const burgerBtn = document.getElementById('burgerMenuBtn');
+const mobileNavPopup = document.getElementById('mobileNavPopup');
+if (burgerBtn && mobileNavPopup) {
+  burgerBtn.addEventListener('click', openMobileNav);
+  mobileNavPopup.querySelector('.close-mobile-nav').addEventListener('click', closeMobileNav);
+}
+// Show/hide burger menu on resize
+function handleBurgerMenuDisplay() {
+  if (window.innerWidth <= 768) {
+    burgerBtn.style.display = 'block';
+  } else {
+    burgerBtn.style.display = 'none';
+    closeMobileNav();
+  }
+}
+window.addEventListener('resize', handleBurgerMenuDisplay);
+document.addEventListener('DOMContentLoaded', handleBurgerMenuDisplay);
+// Disable draggable on mobile
+function isMobile() {
+  return window.innerWidth <= 768;
+}
+function disableDraggableOnMobile() {
+  if (isMobile()) {
+    document.querySelectorAll('.draggable').forEach(el => {
+      el.onmousedown = null;
+      el.ontouchstart = null;
+      el.style.pointerEvents = 'none';
+      el.style.userSelect = 'none';
+      el.style.cursor = 'default';
+    });
+  } else {
+    document.querySelectorAll('.draggable').forEach(makeDraggable);
+  }
+}
+window.addEventListener('resize', disableDraggableOnMobile);
+document.addEventListener('DOMContentLoaded', disableDraggableOnMobile);
+
+function handleLinkClick() {
+  alert('Link button clicked! (placeholder)');
+}
+
+function scrollToAnonymousSubmission() {
+  const el = document.getElementById('anonymous-submission');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+</script>
 </body>
 </html>
