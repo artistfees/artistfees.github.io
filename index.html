@@ -24,12 +24,15 @@
 
     .section-top {
       background: #ffffe6;
+      padding-bottom: 3em;
     }
 
     .section-bottom {
       background: #f5e6ff; /* Change this color as you like */
-      padding-top: 2em;
+      padding-top: 3em;
       padding-bottom: 2em;
+      width: 100vw;
+      margin-left: calc(-1 * (100vw - 100%) / 2);
     }
 
     header {
@@ -229,6 +232,10 @@
         max-width: 100%;
         width: 100%;
         margin-left: 0;
+      }
+      .section-bottom {
+        margin-left: 0;
+        width: 100vw;
       }
     }
 
@@ -451,42 +458,42 @@
         </table>
       </div>
     </div>
+  </div>
 
-    <div class="section-bottom">
-      <div class="main-flex" id="submission-section">
-        <section class="info-text">
-          <p>This website is for visual artists to gain a better overview of fees practiced by various institutions in Norway.</p>
-          <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with the different institutions.</p>
-          <p>Each anonymous submission helps keep this archive active and growing.</p>
-          <p>These are two links regarding rates in the field:
-            <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank" rel="noopener noreferrer">Norskebilledkunstnere</a><br>
-            <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank" rel="noopener noreferrer">Norskekunsthandverkere</a>
-          </p>
-        </section>
-        <section class="contact-form">
-          <form action="https://formsubmit.co/9670ffa316e509cc8f9a647b882641f2" method="POST">
-            <input type="hidden" name="_captcha" value="false">
-            <select name="exhibition_format" required>
-              <option value="" disabled selected>Exhibition Format</option>
-              <option value="Individual">Individual</option>
-              <option value="Group Exhibition">Group Exhibition</option>
-              <option value="Duo Show">Duo Show</option>
-            </select>
-            <select name="year" required>
-              <option value="" disabled selected>Year</option>
-            </select>
-            <input type="text" name="institution" placeholder="Institution Name" required>
-            <input type="text" name="artist_fee" placeholder="Exhibition Fee">
-            <input type="text" name="production_fee" placeholder="Production Fee">
-            <input type="text" name="vederlag" placeholder="Vederlag">
-            <input type="text" name="travel" placeholder="Travel Support (amount)">
-            <input type="text" name="tecnhical_support" placeholder="Tecnhical Support (days)">
-            <button type="submit">Send</button>
-          </form>
-        </section>
-      </div>
+  <div class="section-bottom">
+    <div class="main-flex" id="submission-section">
+      <section class="info-text">
+        <p>This website is for visual artists to gain a better overview of fees practiced by various institutions in Norway.</p>
+        <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with the different institutions.</p>
+        <p>Each anonymous submission helps keep this archive active and growing.</p>
+        <p>These are two links regarding rates in the field:
+          <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank" rel="noopener noreferrer">Norskebilledkunstnere</a><br>
+          <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank" rel="noopener noreferrer">Norskekunsthandverkere</a>
+        </p>
+      </section>
+      <section class="contact-form">
+        <form action="https://formsubmit.co/9670ffa316e509cc8f9a647b882641f2" method="POST">
+          <input type="hidden" name="_captcha" value="false">
+          <select name="exhibition_format" required>
+            <option value="" disabled selected>Exhibition Format</option>
+            <option value="Individual">Individual</option>
+            <option value="Group Exhibition">Group Exhibition</option>
+            <option value="Duo Show">Duo Show</option>
+          </select>
+          <select name="year" required>
+            <option value="" disabled selected>Year</option>
+          </select>
+          <input type="text" name="institution" placeholder="Institution Name" required>
+          <input type="text" name="artist_fee" placeholder="Exhibition Fee">
+          <input type="text" name="production_fee" placeholder="Production Fee">
+          <input type="text" name="vederlag" placeholder="Vederlag">
+          <input type="text" name="travel" placeholder="Travel Support (amount)">
+          <input type="text" name="tecnhical_support" placeholder="Tecnhical Support (days)">
+          <button type="submit">Send</button>
+        </form>
+      </section>
     </div>
-  </div> <!-- end .container -->
+  </div>
 
   <script>
     // Your filtering and sorting scripts remain unchanged.
