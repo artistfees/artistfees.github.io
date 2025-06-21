@@ -6,12 +6,6 @@
   <title>Artist Fee Archive Norway</title>
   <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.counter.dev/script.js" data-id="dad985f2-4cf5-45ef-983b-e17b014b5c75" data-utcoffset="1"></script>
- 
-  <meta name="description" content="Artist Fee Archive Norway: Transparent archive of artist fees, exhibition formats, and institutions in Norway. Search and compare exhibition fees and support." />
-  <meta name="keywords" content="artist fee, Norway, exhibition, archive, art institutions, exhibition fee, production fee, vederlag, travel support" />
-  <meta property="og:title" content="Artist Fee Archive Norway" />
-  <meta property="og:description" content="Transparent archive of artist fees and exhibition formats in Norway." />
-  <meta property="og:type" content="website" />
 
   <style>
     body {
@@ -42,7 +36,6 @@
       display: flex;
       gap: 2em;
       flex-wrap: wrap;
-      cursor: pointer;
     }
 
     nav a {
@@ -50,21 +43,19 @@
       color: #34080B;
       font-weight: 700;
       font-size: 17px;
-      cursor: pointer;
     }
-    
+
     nav a:hover,
     nav a:focus {
       color: #34080B;
       text-decoration: underline;
-      cursor: pointer;
     }
 
     nav a:active {
       color: #34080B;
       text-decoration: underline;
     }
-    
+
     .filters {
       margin-top: 2em;
       display: flex;
@@ -108,7 +99,6 @@
     .table-wrapper {
       margin-top: 1.5em;
       border: 0px solid #34080B; /* same border as table */
-      margin-bottom: 3em;
     }
 
     table {
@@ -141,6 +131,33 @@
 
     tbody tr:nth-child(even) {
       background-color: transparent;
+    }
+
+    .main-flex {
+      display: flex;
+      gap: 4em;
+      align-items: flex-start;
+      margin-top: 2em;
+    }
+    .info-text {
+      flex: 2 1 0;
+      max-width: 600px;
+    }
+    .contact-form {
+      flex: 1 1 0;
+      max-width: 400px;
+      margin-left: auto;
+    }
+    @media (max-width: 900px) {
+      .main-flex {
+        flex-direction: column;
+        gap: 1em;
+      }
+      .info-text, .contact-form {
+        max-width: 100%;
+        width: 100%;
+        margin-left: 0;
+      }
     }
 
     @media (max-width: 768px) {
@@ -195,129 +212,14 @@
       }
 
     }
-
-    .content-flex {
-      display: flex;
-      gap: 4em;
-      align-items: flex-start;
-      width: 100%;
-    }
-    .table-wrapper {
-      flex: 2 1 0;
-      min-width: 400px;
-      margin-bottom: 3em;
-    }
-    .main-wrapper {
-      flex: 1 1 0;
-      max-width: 400px;
-      width: 100%;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    @media (max-width: 900px) {
-      .content-flex {
-        flex-direction: column;
-        gap: 1em;
-      }
-      .table-wrapper, .main-wrapper {
-        max-width: 100%;
-        width: 100%;
-      }
-    }
-
-    main {
-      margin-top: 2em;
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 4em;
-      align-items: flex-start;
-    }
-    .info-text, .contact-form {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-width: 600px;
-      align-self: flex-start;
-    }
-    .info-text p:first-child {
-      margin-top: 0;
-    }
-    @media (max-width: 768px) {
-      main {
-        flex-direction: column;
-        gap: 1em;
-      }
-      .info-text,
-      .contact-form {
-        max-width: 100%;
-        width: 100%;
-        gap: 0.1em;
-      }
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-width: 600px;
-      align-self: flex-start;
-    }
-    .contact-form form {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-    .contact-form input,
-    .contact-form select {
-      width: 100%;
-      max-width: none;
-      margin: 0 0 1em 0;
-      padding: 0.5em;
-      padding-right: 2em;
-      font-size: 17px;
-      border: 3px solid #34080B;
-      border-radius: 0;
-      background-color: transparent;
-      font-family: "PT Serif", serif;
-      box-sizing: border-box;
-      appearance: none;
-      color: #34080B;
-    }
-    .contact-form select {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334080B'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0.6em center;
-      background-size: 0.8em;
-      cursor: pointer;
-    }
-    .contact-form select::-ms-expand {
-      display: none;
-    }
-    .contact-form button {
-      background-color: #34080B;
-      color: white;
-      border: none;
-      padding: 0.5em;
-      font-size: 17px;
-      font-weight: 700;
-      font-family: "PT Serif", serif;
-      cursor: pointer;
-      width: 100%;
-      max-width: none;
-      text-align: left;
-    }
-    .contact-form button:hover {
-      background-color: #2a0608;
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <nav>
-        <a href="about.html">submit yours anonymously</a>
+        <a href="index.html">entries</a>
+        <a href="about.html">submit</a>
       </nav>
       <h1 class="site-title">Artist Fee Archive Norway</h1>
     </header>
@@ -348,169 +250,168 @@
       <input type="text" id="searchInstitution" placeholder="Search Institution" aria-label="Search Institution" />
     </div>
 
-    <div class="content-flex">
-      <div class="table-wrapper">
-        <table id="feeTable" aria-label="Artist Fee Archive table">
-          <thead>
-            <tr>
-              <th onclick="sortTable(0)">Exhibition Format</th>
-              <th onclick="sortTable(1)">Year</th>
-              <th onclick="sortTable(2)">Institution</th>
-              <th>Exhibition Fee p/ Artist</th>
-              <th>Production Fee p/ Artist</th>
-              <th>Vederlag p/ Artist</th>
-              <th>Travel support</th>
-              <th>Technical Support (Days)</th>
-            </tr>
-          </thead>
-           <tbody>
-            <tr>
-              <td>Individual</td>
-              <td>2026</td>
-              <td>UKS</td>
-              <td>30000 NOK</td>
-              <td>30000 NOK</td>
-              <td>Ja</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              </tr>
-            
-             <tr>
-              <td>Duo Show</td>
-              <td>2026</td>
-              <td>BABEL visningsrom</td>
-              <td>6000 NOK</td>
-              <td>No</td>
-              <td>No</td>
-              <td>N/A</td>
-              <td>N/A</td>  
-            </tr>
-             
-            <tr>
-              <td>Group Exhibition</td>
-              <td>2025</td>
-              <td>Nitja</td>
-              <td>8000 NOK</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>8</td>
-            </tr>
-
-             <tr>
-              <td>Group Exhibition</td>
-              <td>2024</td>
-              <td>Hvitsten Salong</td>
-              <td>30000 NOK</td>
-              <td>5000 NOK </td>
-              <td>No</td>
-              <td>No</td>
-              <td>7</td>
-            </tr>
-             
-            <tr>
-              <td>Individual</td>
-              <td>2023</td>
-              <td>Nitja</td>
-              <td>50000 NOK</td>
-              <td>N/A</td>
-              <td>No</td>
-              <td>No</td>
-              <td>8</td>
-            </tr>
-
-            <tr>
-              <td>Individual</td>
-              <td>2023</td>
-              <td>Kunstgarasjen</td>
-              <td>7500 NOK</td>
-              <td>No</td>
-              <td>No</td>
-              <td>No</td>
-              <td>No</td>
-            </tr>
-
-            <tr>
-              <td>Individual</td>
-              <td>2023</td>
-              <td>K-U-K</td>
-              <td>5000 NOK</td>
-              <td>5000 NOK</td>
-              <td>5000 NOK</td>
-              <td>N/A</td>
-              <td>7</td>
-            </tr>
-
-            <tr>
-              <td>Group Exhibition</td>
-              <td>2022</td>
-              <td>ROM for kunst og arkitektur</td>
-              <td>10000 NOK</td>
-              <td>10000 NOK</td>
-              <td>No</td>
-              <td>No</td>
-              <td>1</td>
-            </tr>
-             
-              <tr>
-              <td>Individual</td>
-              <td>2022</td>
-              <td>Trondheim Elektroniske Kunstsenter</td>
-              <td>10000 NOK</td>
-              <td>No</td>
-              <td>No</td>
-              <td>No</td>
-              <td>3</td>
-            </tr>
-
-            <tr>
-              <td>Group Exhibition</td>
-              <td>2022</td>
-              <td>Nasjonalmuseet</td>
-              <td>15000 NOK</td>
-              <td>Etter avtale</td>
-              <td>No</td>
-              <td>No</td>
-              <td>20</td>
+    <div class="table-wrapper">
+      <table id="feeTable" aria-label="Artist Fee Archive table">
+        <thead>
+          <tr>
+            <th onclick="sortTable(0)">Exhibition Format</th>
+            <th onclick="sortTable(1)">Year</th>
+            <th onclick="sortTable(2)">Institution</th>
+            <th>Exhibition Fee p/ Artist</th>
+            <th>Production Fee p/ Artist</th>
+            <th>Vederlag p/ Artist</th>
+            <th>Travel support</th>
+            <th>Technical Support (Days)</th>
           </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="main-wrapper">
-        <section class="info-text">
-          <p>This website is for visual artists to gain a better overview of fees practiced by various institutions in Norway.</p>
-          <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with the different institutions.</p>
-          <p>Each anonymous submission helps keep this archive active and growing.</p>
-          <p>These are two links regarding rates in the field:
-            <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank" rel="noopener noreferrer">Norskebilledkunstnere</a><br>
-            <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank" rel="noopener noreferrer">Norskekunsthandverkere</a>
-          </p>
-        </section>
-        <section class="contact-form">
-          <form action="https://formsubmit.co/9670ffa316e509cc8f9a647b882641f2" method="POST">
-            <input type="hidden" name="_captcha" value="false">
-            <select name="exhibition_format" required>
-              <option value="" disabled selected>Exhibition Format</option>
-              <option value="Individual">Individual</option>
-              <option value="Group Exhibition">Group Exhibition</option>
-              <option value="Duo Show">Duo Show</option>
-            </select>
-            <select name="year" required>
-              <option value="" disabled selected>Year</option>
-            </select>
-            <input type="text" name="institution" placeholder="Institution Name" required>
-            <input type="text" name="artist_fee" placeholder="Exhibition Fee">
-            <input type="text" name="production_fee" placeholder="Production Fee">
-            <input type="text" name="vederlag" placeholder="Vederlag">
-            <input type="text" name="travel" placeholder="Travel Support (amount)">
-            <input type="text" name="tecnhical_support" placeholder="Tecnhical Support (days)">
-            <button type="submit">Send</button>
-          </form>
-        </section>
-      </div>
-    </div>
-  </div>
+        </thead>
+         <tbody>
+          <tr>
+            <td>Individual</td>
+            <td>2026</td>
+            <td>UKS</td>
+            <td>30000 NOK</td>
+            <td>30000 NOK</td>
+            <td>Ja</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            </tr>
+          
+           <tr>
+            <td>Duo Show</td>
+            <td>2026</td>
+            <td>BABEL visningsrom</td>
+            <td>6000 NOK</td>
+            <td>No</td>
+            <td>No</td>
+            <td>N/A</td>
+            <td>N/A</td>  
+          </tr>
+           
+          <tr>
+            <td>Group Exhibition</td>
+            <td>2025</td>
+            <td>Nitja</td>
+            <td>8000 NOK</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>8</td>
+          </tr>
 
+           <tr>
+            <td>Group Exhibition</td>
+            <td>2024</td>
+            <td>Hvitsten Salong</td>
+            <td>30000 NOK</td>
+            <td>5000 NOK </td>
+            <td>No</td>
+            <td>No</td>
+            <td>7</td>
+          </tr>
+           
+          <tr>
+            <td>Individual</td>
+            <td>2023</td>
+            <td>Nitja</td>
+            <td>50000 NOK</td>
+            <td>N/A</td>
+            <td>No</td>
+            <td>No</td>
+            <td>8</td>
+          </tr>
+
+          <tr>
+            <td>Individual</td>
+            <td>2023</td>
+            <td>Kunstgarasjen</td>
+            <td>7500 NOK</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>Individual</td>
+            <td>2023</td>
+            <td>K-U-K</td>
+            <td>5000 NOK</td>
+            <td>5000 NOK</td>
+            <td>5000 NOK</td>
+            <td>N/A</td>
+            <td>7</td>
+          </tr>
+
+          <tr>
+            <td>Group Exhibition</td>
+            <td>2022</td>
+            <td>ROM for kunst og arkitektur</td>
+            <td>10000 NOK</td>
+            <td>10000 NOK</td>
+            <td>No</td>
+            <td>No</td>
+            <td>1</td>
+          </tr>
+           
+            <tr>
+            <td>Individual</td>
+            <td>2022</td>
+            <td>Trondheim Elektroniske Kunstsenter</td>
+            <td>10000 NOK</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td>3</td>
+          </tr>
+
+          <tr>
+            <td>Group Exhibition</td>
+            <td>2022</td>
+            <td>Nasjonalmuseet</td>
+            <td>15000 NOK</td>
+            <td>Etter avtale</td>
+            <td>No</td>
+            <td>No</td>
+            <td>20</td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div> <!-- end .container -->
+
+    <div class="main-flex">
+      <section class="info-text">
+        <p>This website is for visual artists to gain a better overview of fees practiced by various institutions in Norway.</p>
+        <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with the different institutions.</p>
+        <p>Each anonymous submission helps keep this archive active and growing.</p>
+        <p>These are two links regarding rates in the field:
+          <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank" rel="noopener noreferrer">Norskebilledkunstnere</a><br>
+          <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank" rel="noopener noreferrer">Norskekunsthandverkere</a>
+        </p>
+      </section>
+      <section class="contact-form">
+        <form action="https://formsubmit.co/9670ffa316e509cc8f9a647b882641f2" method="POST">
+          <input type="hidden" name="_captcha" value="false">
+          <select name="exhibition_format" required>
+            <option value="" disabled selected>Exhibition Format</option>
+            <option value="Individual">Individual</option>
+            <option value="Group Exhibition">Group Exhibition</option>
+            <option value="Duo Show">Duo Show</option>
+          </select>
+          <select name="year" required>
+            <option value="" disabled selected>Year</option>
+          </select>
+          <input type="text" name="institution" placeholder="Institution Name" required>
+          <input type="text" name="artist_fee" placeholder="Exhibition Fee">
+          <input type="text" name="production_fee" placeholder="Production Fee">
+          <input type="text" name="vederlag" placeholder="Vederlag">
+          <input type="text" name="travel" placeholder="Travel Support (amount)">
+          <input type="text" name="tecnhical_support" placeholder="Tecnhical Support (days)">
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </div>
 
   <script>
     // Your filtering and sorting scripts remain unchanged.
@@ -563,16 +464,6 @@
 
       rowsArray.forEach(row => tbody.appendChild(row));
       tbody.setAttribute('data-sort-dir', asc ? 'asc' : 'desc');
-    }
-  </script>
-
-    <script>
-    const yearSelect = document.querySelector('select[name="year"]');
-    for (let y = 2020; y <= 2035; y++) {
-      const option = document.createElement('option');
-      option.value = y;
-      option.textContent = y;
-      yearSelect.appendChild(option);
     }
   </script>
 </body>
