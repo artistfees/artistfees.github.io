@@ -195,6 +195,36 @@
 
     }
 
+    main {
+      margin-top: 2em;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 4em;
+      align-items: flex-start;
+    }
+    .info-text, .contact-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 600px;
+      align-self: flex-start;
+    }
+    .info-text p:first-child {
+      margin-top: 0;
+    }
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+        gap: 1em;
+      }
+      .info-text,
+      .contact-form {
+        max-width: 100%;
+        width: 100%;
+        gap: 0.1em;
+      }
+    }
+
     .contact-form {
       display: flex;
       flex-direction: column;
@@ -414,7 +444,10 @@
       </table>
     </div>
   </div>
-
+.table-wrapper {
+  margin-bottom: 3em; /* or any value you prefer */
+}
+         <main>
          <section class="info-text">
         <p>This website is for visual artists to gain a better overview of fees practiced by various institutions in Norway.</p>
         <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with the different institutions.</p>
@@ -450,6 +483,7 @@
           <button type="submit">Send</button>
         </form>
       </section>
+    </main>
 
 
   <script>
