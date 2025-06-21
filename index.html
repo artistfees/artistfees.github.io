@@ -139,13 +139,16 @@
       align-items: flex-start;
       margin-top: 2em;
     }
-    .info-text {
-      flex: 2 1 0;
-      max-width: 600px;
+    .info-text, .contact-form {
+      margin-top: 0;
+      align-self: flex-start;
+    }
+    .info-text > *:first-child {
+      margin-top: 0;
     }
     .contact-form {
       flex: 1 1 0;
-      max-width: 400px;
+      max-width: 800px;
       margin-left: auto;
       display: flex;
       flex-direction: column;
