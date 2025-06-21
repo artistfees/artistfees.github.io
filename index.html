@@ -275,8 +275,7 @@
   <div class="container">
     <header>
       <nav>
-        <a href="index.html">entries</a>
-        <a href="about.html">submit</a>
+        <a href="#submission-section" id="submissionLink">anonymous submission</a>
       </nav>
       <h1 class="site-title">Artist Fee Archive Norway</h1>
     </header>
@@ -436,7 +435,7 @@
       </table>
     </div>
 
-    <div class="main-flex">
+    <div class="main-flex" id="submission-section">
       <section class="info-text">
         <p>This website is for visual artists to gain a better overview of fees practiced by various institutions in Norway.</p>
         <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with the different institutions.</p>
@@ -521,6 +520,19 @@
 
       rowsArray.forEach(row => tbody.appendChild(row));
       tbody.setAttribute('data-sort-dir', asc ? 'asc' : 'desc');
+    }
+
+    // Smooth scroll for anonymous submission link
+    const submissionLink = document.getElementById('submissionLink');
+    const submissionSection = document.getElementById('submission-section');
+    if (submissionLink) {
+      submissionLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.getElementById('submission-section');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     }
   </script>
 </body>
