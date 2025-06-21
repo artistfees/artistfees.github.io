@@ -33,39 +33,65 @@
 
     .section-bottom {
       position: relative;
-      background: #34080B;
-      color: #ffffe6;
+      background: transparent;
       padding-top: 2em;
-      padding-bottom: 0;
+      padding-bottom: 10em;
     }
 
     .section-bottom::before {
-      display: none;
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100%;
+      background: #34080B;
+      z-index: 0;
     }
 
-    .section-bottom .info-text,
-    .section-bottom .contact-form,
-    .section-bottom input,
-    .section-bottom select,
-    .section-bottom button,
-    .section-bottom label {
-      color: #ffffe6;
+    .section-bottom-inner, .section-bottom > .container {
+      position: relative;
+      z-index: 1;
+      background: none;
     }
 
-    .section-bottom input,
-    .section-bottom select {
-      background: transparent;
-      border-color: #ffffe6;
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5em 0 0.5em;
+      flex-wrap: wrap;
     }
 
-    .section-bottom button {
-      background: #ffffe6;
+    .site-title {
+      font-weight: 700;
+      font-size: 24px;
+      margin: 0;
       color: #34080B;
     }
 
-    .section-bottom button:hover {
-      background: #e6e6b3;
+    nav {
+      display: flex;
+      gap: 2em;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
       color: #34080B;
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: #34080B;
+      text-decoration: underline;
+    }
+
+    nav a:active {
+      color: #34080B;
+      text-decoration: underline;
     }
 
     .filters {
@@ -182,13 +208,13 @@
       padding: 0.5em;
       padding-right: 2em;
       font-size: 17px;
-      border: 3px solid #34080B;
+      border: 3px solid #ffffe6;
       border-radius: 0;
       background-color: transparent;
       font-family: "PT Serif", serif;
       box-sizing: border-box;
       appearance: none;
-      color: #34080B;
+      color: #ffffe6;
     }
     .contact-form select {
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334080B'/%3E%3C/svg%3E");
@@ -201,8 +227,8 @@
       display: none;
     }
     .contact-form button {
-      background-color: #34080B;
-      color: white;
+      background-color: #ffffe6;
+      color: #34080B;
       border: none;
       padding: 0.5em;
       font-size: 17px;
@@ -214,7 +240,7 @@
       text-align: left;
     }
     .contact-form button:hover {
-      background-color: #2a0608;
+      background-color: #ffffe6;
     }
     @media (max-width: 900px) {
       .main-flex {
