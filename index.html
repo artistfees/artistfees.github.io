@@ -194,6 +194,154 @@
       }
 
     }
+
+    /* Scoped styles for the Untitled-2 form section */
+    .untitled2-container {
+      background: #ffffe6;
+      margin: 2em auto;
+      padding: 2em;
+      max-width: 900px;
+      border: 3px solid #34080B;
+      border-radius: 0;
+      font-family: "PT Serif", serif;
+      color: #34080B;
+    }
+    .untitled2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1.5em 0 0.5em;
+    }
+    .untitled2-title {
+      font-weight: 700;
+      font-size: 24px;
+      margin: 0;
+      color: #34080B;
+    }
+    .untitled2-nav {
+      display: flex;
+      gap: 2em;
+      flex-wrap: wrap;
+    }
+    .untitled2-nav a {
+      text-decoration: none;
+      color: #34080B;
+      font-weight: 700;
+      font-size: 17px;
+      cursor: pointer;
+      background: #ffffe6;
+    }
+    .untitled2-nav a:hover,
+    .untitled2-nav a:focus {
+      color: #34080B;
+      text-decoration: underline;
+    }
+    .untitled2-main {
+      margin-top: 2em;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 4em;
+      align-items: flex-start;
+    }
+    .untitled2-info-text, .untitled2-contact-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 600px;
+      align-self: flex-start;
+    }
+    .untitled2-info-text p:first-child {
+      margin-top: 0;
+    }
+    .untitled2-contact-form form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .untitled2-contact-form input,
+    .untitled2-contact-form select {
+      width: 100%;
+      margin: 0 0 1em 0;
+      padding: 0.5em;
+      padding-right: 2em;
+      font-size: 17px;
+      border: 3px solid #34080B;
+      border-radius: 0;
+      background-color: transparent;
+      font-family: "PT Serif", serif;
+      box-sizing: border-box;
+      appearance: none;
+      color: #34080B;
+    }
+    .untitled2-contact-form select {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334080B'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.6em center;
+      background-size: 0.8em;
+      cursor: pointer;
+    }
+    .untitled2-contact-form select::-ms-expand {
+      display: none;
+    }
+    .untitled2-contact-form button {
+      background-color: #34080B;
+      color: white;
+      border: none;
+      padding: 0.5em;
+      font-size: 17px;
+      font-weight: 700;
+      font-family: "PT Serif", serif;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+    }
+    .untitled2-contact-form button:hover {
+      background-color: #2a0608;
+    }
+    .untitled2-container a {
+      color: #34080B;
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      .untitled2-container {
+        padding: 1em;
+      }
+      .untitled2-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5em;
+      }
+      .untitled2-title {
+        order: 0;
+        font-size: 20px;
+        margin-bottom: 0.25em;
+      }
+      .untitled2-nav {
+        order: 1;
+        flex-direction: column;
+        gap: 0.2em;
+        width: 100%;
+      }
+      .untitled2-nav a {
+        font-size: 16px;
+      }
+      .untitled2-main {
+        flex-direction: column;
+        gap: 1em;
+      }
+      .untitled2-info-text,
+      .untitled2-contact-form {
+        max-width: 100%;
+        width: 100%;
+        gap: 0.1em;
+      }
+      .untitled2-contact-form input,
+      .untitled2-contact-form select,
+      .untitled2-contact-form button {
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -410,16 +558,213 @@
   </main>
 </div>
 
-<script>
-  const yearSelect = document.querySelector('select[name="year"]');
-  for (let y = 2020; y <= 2035; y++) {
-    const option = document.createElement('option');
-    option.value = y;
-    option.textContent = y;
-    yearSelect.appendChild(option);
+<!-- Start of content from Untitled-2 with its own CSS -->
+<style>
+  /* Scoped styles for the Untitled-2 form section */
+  .untitled2-container {
+    background: #ffffe6;
+    margin: 2em auto;
+    padding: 2em;
+    max-width: 900px;
+    border: 3px solid #34080B;
+    border-radius: 0;
+    font-family: "PT Serif", serif;
+    color: #34080B;
   }
+  .untitled2-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1.5em 0 0.5em;
+  }
+  .untitled2-title {
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0;
+    color: #34080B;
+  }
+  .untitled2-nav {
+    display: flex;
+    gap: 2em;
+    flex-wrap: wrap;
+  }
+  .untitled2-nav a {
+    text-decoration: none;
+    color: #34080B;
+    font-weight: 700;
+    font-size: 17px;
+    cursor: pointer;
+    background: #ffffe6;
+  }
+  .untitled2-nav a:hover,
+  .untitled2-nav a:focus {
+    color: #34080B;
+    text-decoration: underline;
+  }
+  .untitled2-main {
+    margin-top: 2em;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4em;
+    align-items: flex-start;
+  }
+  .untitled2-info-text, .untitled2-contact-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    align-self: flex-start;
+  }
+  .untitled2-info-text p:first-child {
+    margin-top: 0;
+  }
+  .untitled2-contact-form form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .untitled2-contact-form input,
+  .untitled2-contact-form select {
+    width: 100%;
+    margin: 0 0 1em 0;
+    padding: 0.5em;
+    padding-right: 2em;
+    font-size: 17px;
+    border: 3px solid #34080B;
+    border-radius: 0;
+    background-color: transparent;
+    font-family: "PT Serif", serif;
+    box-sizing: border-box;
+    appearance: none;
+    color: #34080B;
+  }
+  .untitled2-contact-form select {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334080B'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.6em center;
+    background-size: 0.8em;
+    cursor: pointer;
+  }
+  .untitled2-contact-form select::-ms-expand {
+    display: none;
+  }
+  .untitled2-contact-form button {
+    background-color: #34080B;
+    color: white;
+    border: none;
+    padding: 0.5em;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: "PT Serif", serif;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+  }
+  .untitled2-contact-form button:hover {
+    background-color: #2a0608;
+  }
+  .untitled2-container a {
+    color: #34080B;
+    text-decoration: underline;
+  }
+  @media (max-width: 768px) {
+    .untitled2-container {
+      padding: 1em;
+    }
+    .untitled2-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5em;
+    }
+    .untitled2-title {
+      order: 0;
+      font-size: 20px;
+      margin-bottom: 0.25em;
+    }
+    .untitled2-nav {
+      order: 1;
+      flex-direction: column;
+      gap: 0.2em;
+      width: 100%;
+    }
+    .untitled2-nav a {
+      font-size: 16px;
+    }
+    .untitled2-main {
+      flex-direction: column;
+      gap: 1em;
+    }
+    .untitled2-info-text,
+    .untitled2-contact-form {
+      max-width: 100%;
+      width: 100%;
+      gap: 0.1em;
+    }
+    .untitled2-contact-form input,
+    .untitled2-contact-form select,
+    .untitled2-contact-form button {
+      font-size: 16px;
+    }
+  }
+</style>
+<div class="untitled2-container">
+  <div class="untitled2-header">
+    <nav class="untitled2-nav">
+      <a href="index.html">entries</a>
+      <a href="about.html">submit</a>
+    </nav>
+    <h1 class="untitled2-title">Artist Fee Archive Norway</h1>
+  </div>
+  <div class="untitled2-main">
+    <section class="untitled2-info-text">
+      <p>This website is for visual artists to gain a better overview of fees practiced by various institutions in Norway.</p>
+      <p>Its goal is to provide valuable information that empowers artists to negotiate their terms confidently with the different institutions.</p>
+      <p>Each anonymous submission helps keep this archive active and growing.</p>
+      <p>These are two links regarding rates in the field:
+        <a href="https://www.norskebilledkunstnere.no/aktuelt/veiledende-satser-slik-kan-du-beregne-utstillingshonorar/" target="_blank" rel="noopener noreferrer">Norskebilledkunstnere</a><br>
+        <a href="https://www.norskekunsthandverkere.no/aktuelt/nks-veiledende-satser-en-historisk-lansering" target="_blank" rel="noopener noreferrer">Norskekunsthandverkere</a>
+      </p>
+    </section>
+    <section class="untitled2-contact-form">
+      <form action="https://formsubmit.co/9670ffa316e509cc8f9a647b882641f2" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <select name="exhibition_format" required>
+          <option value="" disabled selected>Exhibition Format</option>
+          <option value="Individual">Individual</option>
+          <option value="Group Exhibition">Group Exhibition</option>
+          <option value="Duo Show">Duo Show</option>
+        </select>
+        <select name="year" required>
+          <option value="" disabled selected>Year</option>
+        </select>
+        <input type="text" name="institution" placeholder="Institution Name" required>
+        <input type="text" name="artist_fee" placeholder="Exhibition Fee">
+        <input type="text" name="production_fee" placeholder="Production Fee">
+        <input type="text" name="vederlag" placeholder="Vederlag">
+        <input type="text" name="travel" placeholder="Travel Support (amount)">
+        <input type="text" name="tecnhical_support" placeholder="Tecnhical Support (days)">
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </div>
+</div>
+<script>
+  // Populate year select in the Untitled-2 form
+  (function() {
+    var yearSelect = document.querySelector('.untitled2-contact-form select[name="year"]');
+    if (yearSelect) {
+      for (var y = 2020; y <= 2035; y++) {
+        var option = document.createElement('option');
+        option.value = y;
+        option.textContent = y;
+        yearSelect.appendChild(option);
+      }
+    }
+  })();
 </script>
-  <script>
+<!-- End of content from Untitled-2 -->
+<script>
     // Your filtering and sorting scripts remain unchanged.
     const filterFormat = document.getElementById('filterFormat');
     const filterYear = document.getElementById('filterYear');
