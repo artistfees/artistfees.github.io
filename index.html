@@ -37,14 +37,12 @@
       color: #ffffe6;
       position: relative;
       background: transparent;
-      padding-top: 0.5em;
-      padding-bottom: 0.5em;
-      width: 100%;
+      padding-top: 2em;
+      padding-bottom: 10em;
     }
 
     .section-bottom::before {
       content: '';
-      display: none;
       position: absolute;
       left: 0;
       top: 0;
@@ -277,7 +275,8 @@
         margin-left: 0;
       }
       .section-bottom {
-        width: 100%;
+        margin-left: 0;
+        width: 100vw;
       }
       .section-bottom-inner {
         padding-left: 0.1em;
@@ -388,13 +387,6 @@ html, body {
   </style>
 </head>
 <body>
-  <!-- Back to Top Triangle Button (fixed, always visible) -->
-  <button id="backToTop" aria-label="Back to top">
-    <svg width="40" height="40" viewBox="0 0 40 40">
-      <polygon points="20,8 32,32 8,32" fill="#34080B" />
-    </svg>
-  </button>
-
   <div class="container">
     <div class="section-top">
       <header>
@@ -607,6 +599,13 @@ html, body {
     </div>
   </div>
 
+  <!-- Triangle Back to Top Button -->
+<button id="backToTop" aria-label="Back to top">
+  <svg width="40" height="40" viewBox="0 0 40 40">
+    <polygon points="20,8 32,32 8,32" fill="#34080B" />
+  </svg>
+</button>
+
   <script>
     // Your filtering and sorting scripts remain unchanged.
     const filterFormat = document.getElementById('filterFormat');
@@ -685,29 +684,30 @@ if (backToTop) {
 <style>
 #backToTop {
   position: fixed;
-  left: 24px;
+  left: 0.5em
   bottom: 24px;
   background: none;
   border: none;
-  padding: 0;
   margin: 0;
   cursor: pointer;
   z-index: 1000;
   outline: none;
   transition: transform 0.2s;
+  /* Prevent movement due to scrollbars or layout changes */
   pointer-events: auto;
+}
+#backToTop:hover svg polygon {
+  fill: #ffffe6;
+  pointer: cursor;
+}
+#backToTop svg {
+  display: block;
 }
 @media (max-width: 600px) {
   #backToTop {
     left: 12px;
     bottom: 12px;
   }
-}
-#backToTop svg {
-  display: block;
-}
-#backToTop:hover svg polygon {
-  fill: #5a1a22;
 }
 </style>
 </html>
