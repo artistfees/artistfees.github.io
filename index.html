@@ -37,12 +37,14 @@
       color: #ffffe6;
       position: relative;
       background: transparent;
-      padding-top: 2em;
-      padding-bottom: 10em;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      width: 100%;
     }
 
     .section-bottom::before {
       content: '';
+      display: none;
       position: absolute;
       left: 0;
       top: 0;
@@ -275,8 +277,7 @@
         margin-left: 0;
       }
       .section-bottom {
-        margin-left: 0;
-        width: 100vw;
+        width: 100%;
       }
       .section-bottom-inner {
         padding-left: 0.1em;
